@@ -9,13 +9,7 @@ namespace :slurp do
     
     # Add in new terminals
     csv.each do |row|
-      # puts row.to_hash
       f = Facility.new
-      # f.name = "test"
-      # f.save
-
-      # puts row["TERM_ID"].to_string
-
       f.name = row["NAME"]
       f.term_id = row["TERM_ID"]
       f.address = row["ADDRESS"]
@@ -50,12 +44,13 @@ namespace :slurp do
       
       puts "#{f.term_id} saved"
 
-      # # Add product/terminal pairs into the "tanks" table
+      # Add product/terminal pairs into the "tanks" table
 
       if row["ASPHALT"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
         a.fuel_id = 1
+        a.save
       end
 
       if row["CHEMICALS"] == "YES"
@@ -73,55 +68,55 @@ namespace :slurp do
       if row["REFINED"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 4
+        a.fuel_id = 5
         a.save
       end
       if row["ETHANOL"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 5
+        a.fuel_id = 6
         a.save
       end
       if row["BIODIESEL"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 6
+        a.fuel_id = 7
         a.save
       end
       if row["CRUDE_OIL"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 7
+        a.fuel_id = 8
         a.save
       end
       if row["JETFUEL"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 8
+        a.fuel_id = 9
         a.save
       end
       if row["GASOLINE"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 9
+        a.fuel_id = 10
         a.save
       end
       if row["DISTILLATE"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 10
+        a.fuel_id = 11
         a.save
       end
       if row["AVGAS"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 11
+        a.fuel_id = 12
         a.save
       end
       if row["BUTANE"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
-        a.fuel_id = 13
+        a.fuel_id = 4
         a.save
       end
 
