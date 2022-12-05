@@ -19,11 +19,10 @@ namespace :slurp do
       f.latitude = row["LATITUDE"]
       f.longitude = row["LONGITUDE"]
       f.county = row["COUNTY"]
-
+      f.countyfips = row["COUNTYFIPS"]
       f.commodity = row["COMMODITY"]
       f.capacity = row["CAPACITY"]
-
-      f.marin_out = row["MARINE_OUT"]
+      f.marine_out = row["MARINE_OUT"]
       f.marine_in = row["MARINE-IN"]
       f.operator = row["OPERATOR"]
       f.owner = row["OWNER"]
@@ -33,13 +32,20 @@ namespace :slurp do
       f.rail_in = row["RAIL_IN"]
       f.rail_out = row["RAIL_OUT"]
       f.source = row["SOURCE"]
-
       f.term_type = row["TYPE"]
       f.truck_in = row["TRUCK_IN"]
       f.truck_out = row["TRUCK_OUT"]
       f.website = row["WEBSITE"]
+      f.status = row["STATUS"]
 
-      f.status = row[""]
+      
+      if row["Asphalt"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 1
+
+
+      end
 
 
       f.save

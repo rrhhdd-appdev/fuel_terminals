@@ -8,10 +8,11 @@
 #  city        :string
 #  commodity   :string
 #  county      :string
+#  countyfips  :integer
 #  latitude    :float
 #  longitude   :float
-#  marin_out   :boolean
 #  marine_in   :boolean
+#  marine_out  :boolean
 #  name        :string
 #  operator    :string
 #  owner       :string
@@ -23,7 +24,7 @@
 #  rail_out    :boolean
 #  source      :string
 #  state       :string
-#  status      :boolean
+#  status      :string
 #  tanks_count :integer
 #  term_type   :string
 #  truck_in    :boolean
@@ -33,6 +34,7 @@
 #  zip4        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  term_id     :string
 #
 class Facility < ApplicationRecord
   has_many(:tanks, { :class_name => "Tank", :foreign_key => "terminal_id", :dependent => :destroy })
