@@ -9,8 +9,15 @@ namespace :slurp do
     
     # Add in new terminals
     csv.each do |row|
+      # puts row.to_hash
       f = Facility.new
+      # f.name = "test"
+      # f.save
+
+      # puts row["TERM_ID"].to_string
+
       f.name = row["NAME"]
+      f.term_id = row["TERM_ID"]
       f.address = row["ADDRESS"]
       f.city = row["CITY"]
       f.state = row["STATE"]
@@ -41,9 +48,9 @@ namespace :slurp do
       
       f.save
       
-      puts "#{f.street_address}, #{f.zip} saved"
+      puts "#{f.term_id} saved"
 
-      # Add product/terminal pairs into the "tanks" table
+      # # Add product/terminal pairs into the "tanks" table
 
       if row["ASPHALT"] == "YES"
         a = Tank.new
@@ -118,10 +125,10 @@ namespace :slurp do
         a.save
       end
 
-
     end
     
-    puts "There are now #{Transaction.count} rows in the transactions table"
+    puts "There are now #{Facility.count} rows in the Facilities table"
+    puts "There are now #{Tank.count} rows in the Tanks table"
 
   end
 

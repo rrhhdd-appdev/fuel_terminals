@@ -39,5 +39,4 @@
 class Facility < ApplicationRecord
   has_many(:tanks, { :class_name => "Tank", :foreign_key => "terminal_id", :dependent => :destroy })
   has_many(:terminal_notes, { :class_name => "TerminalNote", :foreign_key => "terminal_id", :dependent => :destroy })
-  validates(:zip, { :format => { :with => "[0-9]" } })
 end
