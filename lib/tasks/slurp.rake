@@ -7,6 +7,7 @@ namespace :slurp do
     csv_text = File.read(Rails.root.join("lib", "csvs", "petroleum_product_terminals.csv"))
     csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
     
+    # Add in new terminals
     csv.each do |row|
       f = Facility.new
       f.name = row["NAME"]
@@ -37,19 +38,87 @@ namespace :slurp do
       f.truck_out = row["TRUCK_OUT"]
       f.website = row["WEBSITE"]
       f.status = row["STATUS"]
-
       
-      if row["Asphalt"] == "YES"
+      f.save
+      
+      puts "#{f.street_address}, #{f.zip} saved"
+
+      # Add product/terminal pairs into the "tanks" table
+
+      if row["ASPHALT"] == "YES"
         a = Tank.new
         a.terminal_id = f.id
         a.fuel_id = 1
+      end
 
-
+      if row["CHEMICALS"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 2
+        a.save
+      end
+      if row["PROPANE"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 3
+        a.save
+      end
+      if row["REFINED"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 4
+        a.save
+      end
+      if row["ETHANOL"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 5
+        a.save
+      end
+      if row["BIODIESEL"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 6
+        a.save
+      end
+      if row["CRUDE_OIL"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 7
+        a.save
+      end
+      if row["JETFUEL"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 8
+        a.save
+      end
+      if row["GASOLINE"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 9
+        a.save
+      end
+      if row["DISTILLATE"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 10
+        a.save
+      end
+      if row["AVGAS"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 11
+        a.save
+      end
+      if row["BUTANE"] == "YES"
+        a = Tank.new
+        a.terminal_id = f.id
+        a.fuel_id = 13
+        a.save
       end
 
 
-      f.save
-      puts "#{f.street_address}, #{f.zip} saved"
     end
     
     puts "There are now #{Transaction.count} rows in the transactions table"
