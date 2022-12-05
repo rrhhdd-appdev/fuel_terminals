@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all fuels
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new fuel
+    </h2>
+
+    <form action="/insert_fuel" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="category_box">
+          Category
+        </label>
+
+        <input type="text" id="category_box" name="query_category">
+      </div>
+
+      <div>
+        <label for="tanks_count_box">
+          Tanks count
+        </label>
+
+        <input type="text" id="tanks_count_box" name="query_tanks_count">
+      </div>
+
+      <button>
+        Create fuel
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Category
+        </th>
+
+        <th>
+          Tanks count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_fuels.each do |a_fuel| %>
+      <tr>
+        <td>
+          <%= a_fuel.id %>
+        </td>
+
+        <td>
+          <%= a_fuel.name %>
+        </td>
+
+        <td>
+          <%= a_fuel.category %>
+        </td>
+
+        <td>
+          <%= a_fuel.tanks_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_fuel.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_fuel.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/fuels/<%= a_fuel.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

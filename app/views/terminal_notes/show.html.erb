@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Terminal note #<%= @the_terminal_note.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/terminal_notes">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_terminal_note/<%= @the_terminal_note.id %>">
+          Delete terminal note
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Note
+      </dt>
+      <dd>
+        <%= @the_terminal_note.note %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_terminal_note.user_id %>
+      </dd>
+
+      <dt>
+        Terminal
+      </dt>
+      <dd>
+        <%= @the_terminal_note.terminal_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_terminal_note.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_terminal_note.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit terminal note
+    </h2>
+
+    <form action="/modify_terminal_note/<%= @the_terminal_note.id %>"  method="post" >
+      <div>
+        <label for="note_box">
+          Note
+        </label>
+
+        <textarea id="note_box" name="query_note"><%= @the_terminal_note.note %></textarea>
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_terminal_note.user_id %>">
+      </div>
+
+      <div>
+        <label for="terminal_id_box">
+          Terminal
+        </label>
+
+        <input type="text" id="terminal_id_box" name="query_terminal_id" value="<%= @the_terminal_note.terminal_id %>">
+      </div>
+
+      <button>
+        Update terminal note
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

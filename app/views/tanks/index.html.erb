@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all tanks
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new tank
+    </h2>
+
+    <form action="/insert_tank" method="post">
+      <div>
+        <label for="terminal_id_box">
+          Terminal
+        </label>
+
+        <input type="text" id="terminal_id_box" name="query_terminal_id">
+      </div>
+
+      <div>
+        <label for="fuel_id_box">
+          Fuel
+        </label>
+
+        <input type="text" id="fuel_id_box" name="query_fuel_id">
+      </div>
+
+      <div>
+        <label for="product_capacity_box">
+          Product capacity
+        </label>
+
+        <input type="text" id="product_capacity_box" name="query_product_capacity">
+      </div>
+
+      <button>
+        Create tank
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Terminal
+        </th>
+
+        <th>
+          Fuel
+        </th>
+
+        <th>
+          Product capacity
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_tanks.each do |a_tank| %>
+      <tr>
+        <td>
+          <%= a_tank.id %>
+        </td>
+
+        <td>
+          <%= a_tank.terminal_id %>
+        </td>
+
+        <td>
+          <%= a_tank.fuel_id %>
+        </td>
+
+        <td>
+          <%= a_tank.product_capacity %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_tank.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_tank.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/tanks/<%= a_tank.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
