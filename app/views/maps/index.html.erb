@@ -1,37 +1,54 @@
-
-
 <div>
   <div id="map" style='width: 800px; height: 400px;'></div>
 </div>
 
 <script>
   function initMap() {
+    // initiate a new map
     var mapDiv = document.getElementById('map');
-
     var map = new google.maps.Map(mapDiv);
 
+    // An empty bounds variable for seeting automatic zoom level (bounds of map)
     var bounds = new google.maps.LatLngBounds();
-    
-    var infowindow = new google.maps.InfoWindow({
-      content: "Click Content" 
-    });
-    
-    var marker = new google.maps.Marker({
-      position: {lat: 41.8381065, lng: -87.6512738}, 
-      map: map,
-      title: 'Hello World!',
-      icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' 
-    });
-    
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
 
-  bounds.extend(new google.maps.LatLng(41.8381065, -87.6512738 ));
+    <% Facility.all.each do |place| %>
 
-  map.fitBounds(bounds);
+      // Make info window for this place
+      var infowindow_<%= place.id %> = new google.maps.InfoWindow({
+        content: "<b><%= place.name %></b>" 
+      });
+
+      // Make marker for this place
+      var marker_<%= place.id %> = new google.maps.Marker({
+        position: {lat: <%= place.latitude %>, lng: <%= place.longitude %>},
+        map: map,
+        title: "<%= place.name %>",
+        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+      });
+
+      // Click to show info window
+      marker_<%= place.id %>.addListener('click', function() {
+        infowindow_<%= place.id %>.open(map, marker_<%= place.id %>);
+      });
+
+      // Add this marker in map bounds
+      bounds.extend(new google.maps.LatLng(<%= place.latitude %>, <%= place.longitude %>));
+
+    <% end %>
+
+    map.fitBounds(bounds);
+
   };
-  
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=[mykey]&callback=initMap"
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV.fetch("GMAPS_KEY")%>&callback=initMap"
 async defer></script>
+
+
+
+
+<h1><%=Facility.count%></h1>
+<h1><%=Facility.where({ :state => "CA" }).count%></h1>
