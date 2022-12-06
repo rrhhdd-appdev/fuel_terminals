@@ -12,6 +12,12 @@ class MarketsController < ApplicationController
 
     @matching_facilities = Facility.where({ :state => the_state })
 
+    @capacity_sum = 0
+    @matching_facilities.each do |add_cap|
+      @capacity_sum += add_cap.capacity 
+    end
+
+
     render({ :template => "markets/show.html.erb" })
   end
 
