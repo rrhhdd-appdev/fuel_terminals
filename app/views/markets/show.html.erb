@@ -1,6 +1,8 @@
 
 <h1> <%=params.fetch("path_id")%> Terminals </h1>
-  
+
+<!-- Basic market info/details (shown as cards) -->
+
   <div class="row">
     <div class="col-md-6">
       <div class="card text-center">
@@ -25,6 +27,60 @@
   </div>
 
 
+
+<!-- Map showing each temrinal in the defined market -->
+  
+<div>
+  <div class="map" id="map" style='height: 500px;'></div>
+</div>
+
+<script>
+  function initMap() {
+    // initiate a new map
+   var mapDiv = document.getElementById('map');
+   var map = new google.maps.Map(mapDiv);
+
+
+    // An empty bounds variable for seeting automatic zoom level (bounds of map)
+    var bounds = new google.maps.LatLngBounds();
+
+    <% @matching_facilities.each do |place| %>
+
+      // Make info window for this place
+      var infowindow_<%= place.id %> = new google.maps.InfoWindow({
+        content: "<b><%= place.name %></b>" 
+      });
+
+      // Make marker for this place
+        var marker_<%= place.id %> = new google.maps.Marker({
+          position: {lat: <%= place.latitude %>, lng: <%= place.longitude %>},
+          map: map,
+          title: "<%= place.name %>",
+          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        });
+
+      // Click to show info window
+      marker_<%= place.id %>.addListener('click', function() {
+        infowindow_<%= place.id %>.open(map, marker_<%= place.id %>);
+      });
+
+      // Add this marker in map bounds
+      bounds.extend(new google.maps.LatLng(<%= place.latitude %>, <%= place.longitude %>));
+      
+    <% end %>
+
+    map.fitBounds(bounds);
+  };
+</script>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV.fetch("GMAPS_KEY")%>&callback=initMap"
+async defer></script>
+
+
+<!-- Cards for each temrinal in the defined market -->
+
 <div class="row">
   <% @matching_facilities.each do |facility| %>
     <div class="col-md-4">
@@ -47,4 +103,9 @@
   .col-md-6{
     margin-bottom: 20px;
   }
+  .map{
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
 </style>
