@@ -1,5 +1,5 @@
 <div>
-  <div id="map" style='width: 800px; height: 400px;'></div>
+  <div id="map" style='width: 1000px; height: 500px;'></div>
 </div>
 
 <script>
@@ -19,12 +19,12 @@
       });
 
       // Make marker for this place
-      var marker_<%= place.id %> = new google.maps.Marker({
-        position: {lat: <%= place.latitude %>, lng: <%= place.longitude %>},
-        map: map,
-        title: "<%= place.name %>",
-        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-      });
+        var marker_<%= place.id %> = new google.maps.Marker({
+          position: {lat: <%= place.latitude %>, lng: <%= place.longitude %>},
+          map: map,
+          title: "<%= place.name %>",
+          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        });
 
       // Click to show info window
       marker_<%= place.id %>.addListener('click', function() {
@@ -33,10 +33,12 @@
 
       // Add this marker in map bounds
       bounds.extend(new google.maps.LatLng(<%= place.latitude %>, <%= place.longitude %>));
-
+      
     <% end %>
 
     map.fitBounds(bounds);
+
+
 
   };
 
@@ -46,6 +48,7 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV.fetch("GMAPS_KEY")%>&callback=initMap"
 async defer></script>
+<script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 
 
 
