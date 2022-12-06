@@ -5,8 +5,9 @@
 <script>
   function initMap() {
     // initiate a new map
-    var mapDiv = document.getElementById('map');
-    var map = new google.maps.Map(mapDiv);
+   var mapDiv = document.getElementById('map');
+   var map = new google.maps.Map(mapDiv);
+
 
     // An empty bounds variable for seeting automatic zoom level (bounds of map)
     var bounds = new google.maps.LatLngBounds();
@@ -37,19 +38,13 @@
     <% end %>
 
     map.fitBounds(bounds);
-
-
-
   };
-
 </script>
 
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV.fetch("GMAPS_KEY")%>&callback=initMap"
 async defer></script>
-<script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
-
 
 
 

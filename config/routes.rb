@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   # Route for map view
 
   get("/map", { :controller => "maps", :action => "index" })
+  
+  # Route for Markets views
+  
+  get("/markets", { :controller => "markets", :action => "index" })
+  get("/markets/:path_id", { :controller => "markets", :action => "show" })
 
   #-------------------------
 
