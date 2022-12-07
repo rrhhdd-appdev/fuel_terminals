@@ -2,7 +2,7 @@
 
 
 
-
+<!--
 
 <div>
   <div class="map" id="map" style='height: 700px;'></div>
@@ -52,7 +52,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV.fetch("GMAPS_KEY")%>&callback=initMap"
 async defer></script>
 
-
+-->
 
 <!-- <h1><%=Facility.count%></h1> -->
 <!-- <h1><%=Facility.where({ :state => "CA" }).count%></h1> --> 
@@ -61,35 +61,41 @@ async defer></script>
 
 
 <!--Form to search for facilities that match a certain criteria -->
-
-<h1>Terminal Search
 <div>
-  
+<h1>Terminal Search</h1>
+</div>
+
+<div>
+<h4>Location</h4>
 </div>
 
 
-<form action="/search_market" method="post">
-  <label for="state_search" class="form-label">State</label>
-  <select class="form-select" aria-label="Default select example" id="state_search" name="query_state">
-    <option selected>State</option>
-    <% @state_list.each do |list|%>
-      <option value="<%=list%>"><%=list%></option>
-    <%end%>
-  </select>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+<form action="/markets">
+  <div class="row g-3">
+    <div class="col-sm-5">
+      <label class="visually-hidden" for="city_name">City</label>
+      <input id="city_name" type="text" class="form-control" placeholder="City" aria-label="city" name="city">
+    </div>
+    <div class="col-sm">
+      <select class="form-select" aria-label="state" id="state_search" name="state">
+        <option selected id="state_search">State</option>
+          <% @state_list.each do |list|%>
+            <option value="<%=list%>"><%=list%></option>
+          <%end%>
+      </select>
+    </div>
+    <div class="col-sm">
+      <label class="visually-hidden" for="zip_num">Zip Code</label>
+      <input id="zip_num" type="integer" class="form-control" placeholder="Zip Code" aria-label="zip" name="zip">
+    </div>
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </form>
 
-<!--
-<form action="/search_market" method="post">
-      <div>
-        <label for="state_box">
-          State
-        </label>
 
-        <input type="text" id="state_box" name="query_state">
-      </div>
-  </form>
--->
+
 
 <style>
   .map{
@@ -99,6 +105,7 @@ async defer></script>
   
 </style>
 
-
+<!--
 <%@search_criteria = %q(CA)%>
 <%= Facility.all.where({ :state => @search_criteria })%>
+-->
