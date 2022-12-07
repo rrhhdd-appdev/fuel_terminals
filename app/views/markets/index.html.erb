@@ -1,1 +1,18 @@
 Hi
+
+
+    <%@state_list = Array.new
+    
+    Facility.all.each do |findstate|
+      current_state = findstate.state
+      if @state_list.include? current_state
+      else
+        @state_list.push(current_state)
+      end 
+    end%>
+<%=@state_list%>
+
+<hr>
+<%= Facility.all.where({ :state => "CA"})%>
+<hr>
+<%= @search_state %>

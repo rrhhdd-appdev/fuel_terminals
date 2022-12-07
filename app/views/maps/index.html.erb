@@ -1,5 +1,11 @@
+<h1>Homepage?</h1>
+
+
+
+
+
 <div>
-  <div id="map" style='width: 1000px; height: 500px;'></div>
+  <div class="map" id="map" style='height: 700px;'></div>
 </div>
 
 <script>
@@ -48,5 +54,51 @@ async defer></script>
 
 
 
-<h1><%=Facility.count%></h1>
-<h1><%=Facility.where({ :state => "CA" }).count%></h1>
+<!-- <h1><%=Facility.count%></h1> -->
+<!-- <h1><%=Facility.where({ :state => "CA" }).count%></h1> --> 
+
+
+
+
+<!--Form to search for facilities that match a certain criteria -->
+
+<h1>Terminal Search
+<div>
+  
+</div>
+
+
+<form action="/search_market" method="post">
+  <label for="state_search" class="form-label">State</label>
+  <select class="form-select" aria-label="Default select example" id="state_search" name="query_state">
+    <option selected>State</option>
+    <% @state_list.each do |list|%>
+      <option value="<%=list%>"><%=list%></option>
+    <%end%>
+  </select>
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+
+<!--
+<form action="/search_market" method="post">
+      <div>
+        <label for="state_box">
+          State
+        </label>
+
+        <input type="text" id="state_box" name="query_state">
+      </div>
+  </form>
+-->
+
+<style>
+  .map{
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
+</style>
+
+
+<%@search_criteria = %q(CA)%>
+<%= Facility.all.where({ :state => @search_criteria })%>

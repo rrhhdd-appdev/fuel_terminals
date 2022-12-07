@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
   get("/markets", { :controller => "markets", :action => "index" })
   get("/markets/:path_id", { :controller => "markets", :action => "show" })
+  post("/search_market", { :controller => "markets", :action => "search" })
 
   #-------------------------
 

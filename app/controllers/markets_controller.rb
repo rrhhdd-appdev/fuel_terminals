@@ -21,4 +21,11 @@ class MarketsController < ApplicationController
     render({ :template => "markets/show.html.erb" })
   end
 
+  def search
+    @search_state = params.fetch("query_state")
+
+    redirect_to("/markets/#{@search_state}", { :notice => "State successfully searched."} )
+
+  end
+
 end
