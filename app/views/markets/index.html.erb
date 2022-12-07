@@ -103,27 +103,28 @@ async defer></script>
 <div class="row">
   <% @matching_facilities.each do |facility| %>
     <div class="col-md-4">
-      <div class="card">
+      <div class="card text-center">
         <div class="card-body">
           <h5 class="card-title"><%= facility.name %></h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Terminal Details
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#emodal<%= facility.id %>">
+            Terminal Info
           </button>
           <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="emodal<%= facility.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel"><%= facility.name %></h1>
+                  <h1 class="modal-title fs-5" id="Modal<%= facility.id %>"><%= facility.name %></h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <div> <h5>Address</h5>
+                  <div><h5>Address</h5>
                     <%= facility.address %> <br>
                     <%= facility.city %>, <%= facility.state %> <%= facility.zip %>
                   </div>
+                  <br>
                   <div><h5>Logistics</h5>
                     <table class="table table-bordered">
                       <tr>
@@ -153,13 +154,27 @@ async defer></script>
                       </tr>
                     </table>
                   </div>
+                  <br>
+                  <div><h5>Products</h5>
+                    <%= facility.commodity %> 
+                  </div>
+                  <br>
+                  <div><h5>Capacity</h5>
+                    <%= number_with_delimiter(facility.capacity, :delimiter => ',') %>
+                  </div>
+                  <br>
+                  <div><h5>Website</h5>
+                    <a href="<%= facility.website %>">Website</a> 
+                  </div>
+                  <br>
 
                     
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <a class="btn btn-primary" href="/facilities/<%= facility.id %>" role="button">Terminal Details</a>
                 </div>
+
               </div>
             </div>
           </div>
@@ -208,6 +223,9 @@ async defer></script>
   .map{
     margin-bottom: 20px;
     border-radius: 10px;
+  }
+  .card-title{
+    margin-bottom: 15px;
   }
   
 </style>
