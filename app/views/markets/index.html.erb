@@ -120,9 +120,41 @@ async defer></script>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <h5>Address</h5>
+                  <div> <h5>Address</h5>
                     <%= facility.address %> <br>
                     <%= facility.city %>, <%= facility.state %> <%= facility.zip %>
+                  </div>
+                  <div><h5>Logistics</h5>
+                    <table class="table table-bordered">
+                      <tr>
+                        <td></td>
+                        <th>In</th>
+                        <th>Out</th>
+                      </tr>
+                      <tr>
+                        <th>Pipe</th>
+                        <td><%= facility.pipe_in %></td>
+                        <td><%= facility.pipe_out %></td>
+                      </tr>
+                      <tr>
+                        <th>Truck</th>
+                        <td><%= facility.truck_in %></td>
+                        <td><%= facility.truck_out %></td>
+                      </tr>
+                      <tr>
+                        <th>Rail</th>
+                        <td><%= facility.rail_in %></td>
+                        <td><%= facility.rail_out %></td>
+                      </tr>
+                      <tr>
+                        <th>Marine</th>
+                        <td><%= facility.marine_in %></td>
+                        <td><%= facility.marine_out %></td>
+                      </tr>
+                    </table>
+                  </div>
+
+                    
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
