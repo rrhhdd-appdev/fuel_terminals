@@ -48,7 +48,8 @@
 
       // Make info window for this place
       var infowindow_<%= place.id %> = new google.maps.InfoWindow({
-        content: "<b><%= place.name %></b>" 
+        content: '<h6><b><%= place.name %></b><h6>' +
+                  '<br><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#emodal<%= place.id %>">Terminal Info</button>'
       });
 
       // Make marker for this place
@@ -80,6 +81,9 @@ async defer></script>
 
 
 
+
+
+
 <!-- Cards for each temrinal in the defined market -->
 
 <div class="row">
@@ -93,7 +97,7 @@ async defer></script>
          <!-- <h5 class="card-title"><%= facility.name %></h5> -->
           <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#emodal<%= facility.id %>">
+          <button type="button" id="bmodal<%= facility.id %>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#emodal<%= facility.id %>">
             Terminal Info
           </button>
           <!-- Modal -->
