@@ -23,7 +23,17 @@ class MarketsController < ApplicationController
 
     @matching_facilities = Facility.where(query_filters)
     
+
     
+    @state_list = Array.new
+    
+    Facility.all.each do |findstate|
+      current_state = findstate.state
+      if @state_list.include? current_state
+      else
+        @state_list.push(current_state)
+      end 
+    end
     
       
     

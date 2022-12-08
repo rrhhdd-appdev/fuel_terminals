@@ -1,5 +1,4 @@
-
-
+<h1>Terminal Search Results</h1>
 
 <!-- Basic market info/details (shown as cards) -->
 
@@ -152,12 +151,16 @@ async defer></script>
                     <%= number_with_delimiter(facility.capacity, :delimiter => ',') %>
                   </div>
                   <br>
+                  <% terminal_site = facility.website
+                      if terminal_site.include? "https://"
+                        terminal_site.slice! "https://"
+                      elsif terminal_site.include? "http://"
+                        terminal_site.slice! "http://"
+                      end %>
                   <div><h5>Website</h5>
-                    <a href="<%= facility.website %>">Website</a> 
+                    <a href="http://<%= terminal_site %>" target="_blank" rel="noreferrer">Terminal's Website</a> 
                   </div>
                   <br>
-
-                    
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -173,6 +176,39 @@ async defer></script>
   <%end%>
 </div>
 
+
+
+<!-- Change search parameters -->
+<hr>
+<div>
+  <h4>Change search:</h4>
+</div>
+
+
+<form action="/markets">
+  <div class="row g-3">
+    <div class="col-sm-5">
+      <label class="visually-hidden" for="city_name">City</label>
+      <input id="city_name" type="text" class="form-control" placeholder="City" aria-label="city" name="city">
+    </div>
+    <div class="col-sm">
+      <select class="form-select" aria-label="state" id="state_search" name="state">
+        <option selected id="state_search">State</option>
+          <% @state_list.each do |list|%>
+            <option value="<%=list%>"><%=list%></option>
+          <%end%>
+      </select>
+    </div>
+    <div class="col-sm">
+      <label class="visually-hidden" for="zip_num">Zip Code</label>
+      <input id="zip_num" type="integer" class="form-control" placeholder="Zip Code" aria-label="zip" name="zip">
+    </div>
+  </div>
+  <br>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
 
 
 <style>
