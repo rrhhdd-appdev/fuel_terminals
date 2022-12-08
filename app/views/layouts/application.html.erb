@@ -20,32 +20,38 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Fuel Supply Logistics</a>
+      <a class="navbar-brand" href="/map">Fuel Supply Logistics</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link active" href="/map">Terminals Map</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+            <a class="nav-link active dropdown-toggle" href="/user_sign_in" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <% if session.fetch(:user_id) !=nil
+                  current_user = session.fetch(:user_id)
+                  current_user_fname = User.where( :id => current_user).at(0).first_name%>
+                  <%= current_user_fname.capitalize %>
+                <% else %>
+                  User Account
+                <% end %>
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="/user_sign_in">Sign in</a></li>
+              <li><a class="dropdown-item" href="/user_sign_up">Create an account</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="/user_sign_out">Sign out</a></li>
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link disabled">Disabled</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
