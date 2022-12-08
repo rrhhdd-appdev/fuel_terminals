@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_05_191934) do
+ActiveRecord::Schema.define(version: 2022_12_08_002523) do
 
   create_table "companies", force: :cascade do |t|
     t.string "company_name"
@@ -33,13 +33,6 @@ ActiveRecord::Schema.define(version: 2022_12_05_191934) do
     t.string "operator"
     t.string "commodity"
     t.integer "capacity"
-    t.boolean "truck_in"
-    t.boolean "truck_out"
-    t.boolean "pipe_in"
-    t.boolean "pipe_out"
-    t.boolean "marine_in"
-    t.boolean "rail_in"
-    t.boolean "rail_out"
     t.string "parsel"
     t.string "city"
     t.string "state"
@@ -48,10 +41,17 @@ ActiveRecord::Schema.define(version: 2022_12_05_191934) do
     t.integer "tanks_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "marine_out"
     t.integer "countyfips"
     t.string "status"
     t.string "term_id"
+    t.string "truck_in"
+    t.string "truck_out"
+    t.string "marine_in"
+    t.string "marine_out"
+    t.string "rail_in"
+    t.string "rail_out"
+    t.string "pipe_in"
+    t.string "pipe_out"
   end
 
   create_table "fuels", force: :cascade do |t|
