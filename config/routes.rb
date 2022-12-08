@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # Homepage
+  get("/", { :controller => "application", :action => "homepage" })
+
+
   # Route for map view
 
   get("/map", { :controller => "maps", :action => "index" })
