@@ -1,7 +1,7 @@
 class FacilitiesController < ApplicationController
   def index
     matching_facilities = Facility.all
-
+ 
     @list_of_facilities = matching_facilities.order({ :created_at => :desc })
 
     render({ :template => "facilities/index.html.erb" })
@@ -13,6 +13,12 @@ class FacilitiesController < ApplicationController
     matching_facilities = Facility.where({ :id => the_id })
 
     @the_facility = matching_facilities.at(0)
+
+
+    user_id = session.fetch(:user_id)
+    matching_terminal_notes = TerminalNote.all.where( :user => user_id)
+
+    @list_of_terminal_notes = matching_terminal_notes.order({ :created_at => :desc })
 
     render({ :template => "facilities/show.html.erb" })
   end

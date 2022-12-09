@@ -1,6 +1,7 @@
 class TerminalNotesController < ApplicationController
   def index
-    matching_terminal_notes = TerminalNote.all
+    user_id = session.fetch(:user_id)
+    matching_terminal_notes = TerminalNote.all.where( :user => user_id)
 
     @list_of_terminal_notes = matching_terminal_notes.order({ :created_at => :desc })
 
@@ -20,7 +21,7 @@ class TerminalNotesController < ApplicationController
   def create
     the_terminal_note = TerminalNote.new
     the_terminal_note.note = params.fetch("query_note")
-    the_terminal_note.user_id = params.fetch("query_user_id")
+    the_terminal_note.user_id = session.fetch(:user_id)
     the_terminal_note.terminal_id = params.fetch("query_terminal_id")
 
     if the_terminal_note.valid?

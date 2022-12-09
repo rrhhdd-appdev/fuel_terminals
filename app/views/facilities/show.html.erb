@@ -1,79 +1,207 @@
+<h2>Terminal Notes</h2>
+
+
+<table border="1">
+ <tr>
+  <th>
+     User
+   </th>
+  <th>
+    Note
+  </th>
+  <th>
+    Created at
+  </th>
+  <th>
+   </th>
+ </tr>
+
+ <% @list_of_terminal_notes.each do |a_terminal_note| %>
+ <tr>
+  <td>
+     <%= a_terminal_note.user_id %>
+  </td>
+  <td>
+    <%= a_terminal_note.note %>
+  </td>
+  <td>
+   <%= time_ago_in_words(a_terminal_note.created_at) %> ago
+  </td>
+  </tr>
+  <% end %>
+</table>
+
+
+<hr>
+
+<h3>Add a new note about this terminal</h3>
+
+<form action="/insert_terminal_note" method="post">
+  <input id="query_terminal_id" type="hidden" value="<%= @the_facility.id %>" name="query_terminal_id">
+
+  <label for="browser_note">
+    Note
+  </label>
+  <textarea id="browser_note" rows="3" name="query_note" placeholder="Enter notes..."></textarea>
+
+  <button>Add note</button>
+
+
+<hr>
+
+
 <div>
-  <div>
-    <h1>
-      Facility #<%= @the_facility.id %> details
-    </h1>
+  <h1><%= @the_facility.name %> Terminal Details</h1>
+</div>
+<hr>
 
-    <div>
-      <div>
-        <a href="/map">
-          Go back to map
-        </a>
-      </div>
 
-      <div>
-        <a href="/delete_facility/<%= @the_facility.id %>">
-          Delete facility
-        </a>
+<div>
+  <h4>Basic Info</h4>
+</div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Owner
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.owner %></p>
+        </div>
       </div>
     </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Operator
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.operator %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Status
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.status %></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <dl>
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @the_facility.name %>
-      </dd>
+    <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Capacity (bbls)
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.capacity %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Commodity
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.commodity %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Type
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.term_type %></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <dt>
-        Address
-      </dt>
-      <dd>
-        <%= @the_facility.address %>
-      </dd>
+<div>
+  <h4>Contact Information</h4>
+</div>
 
-      <dt>
-        Phone
-      </dt>
-      <dd>
-        <%= @the_facility.phone %>
-      </dd>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Address
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.address %><br><%= @the_facility.city %>, <%= @the_facility.state %> <%= @the_facility.zip %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Phone
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.phone %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Company Website
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.website %></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <dt>
-        Term type
-      </dt>
-      <dd>
-        <%= @the_facility.term_type %>
-      </dd>
+<div>
+  <h4>Contact Information</h4>
+</div>
 
-      <dt>
-        Status
-      </dt>
-      <dd>
-        <%= @the_facility.status %>
-      </dd>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Address
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.address %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Phone
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.phone %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Company Website
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.website %></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <dt>
-        County
-      </dt>
-      <dd>
-        <%= @the_facility.county %>
-      </dd>
 
-      <dt>
-        Latitude
-      </dt>
-      <dd>
-        <%= @the_facility.latitude %>
-      </dd>
 
-      <dt>
-        Longitude
-      </dt>
-      <dd>
-        <%= @the_facility.longitude %>
-      </dd>
 
       <dt>
         Source
@@ -82,40 +210,8 @@
         <%= @the_facility.source %>
       </dd>
 
-      <dt>
-        Website
-      </dt>
-      <dd>
-        <%= @the_facility.website %>
-      </dd>
 
-      <dt>
-        Owner
-      </dt>
-      <dd>
-        <%= @the_facility.owner %>
-      </dd>
-
-      <dt>
-        Operator
-      </dt>
-      <dd>
-        <%= @the_facility.operator %>
-      </dd>
-
-      <dt>
-        Commodity
-      </dt>
-      <dd>
-        <%= @the_facility.commodity %>
-      </dd>
-
-      <dt>
-        Capacity
-      </dt>
-      <dd>
-        <%= @the_facility.capacity %>
-      </dd>
+ 
 
       <dt>
         Truck in
@@ -180,58 +276,15 @@
         <%= @the_facility.parsel %>
       </dd>
 
-      <dt>
-        City
-      </dt>
-      <dd>
-        <%= @the_facility.city %>
-      </dd>
 
-      <dt>
-        State
-      </dt>
-      <dd>
-        <%= @the_facility.state %>
-      </dd>
-
-      <dt>
-        Zip
-      </dt>
-      <dd>
-        <%= @the_facility.zip %>
-      </dd>
-
-      <dt>
-        Zip4
-      </dt>
-      <dd>
-        <%= @the_facility.zip4 %>
-      </dd>
-
-      <dt>
-        Tanks count
-      </dt>
-      <dd>
-        <%= @the_facility.tanks_count %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_facility.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_facility.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
-</div>
-
+<hr>
+    <div>
+      <div>
+        <a href="/delete_facility/<%= @the_facility.id %>">
+          Delete facility
+        </a>
+      </div>
+    </div>
 <hr>
 
 
@@ -474,3 +527,12 @@
 </div>
 
 <hr>
+
+
+
+
+<style>
+  .col-md-4{
+    margin-bottom: 20px;
+  }
+</style>
