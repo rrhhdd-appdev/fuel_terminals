@@ -1,22 +1,53 @@
 
+<% Tank.where({ :terminal_id => @the_facility.id }).all.each do |list|%>
+  <ul><%=list.id%>
+    <li><%=list.fuel.name%></li>
+    <li><%=list.terminal.id%></li>
+  </ul>
+<%end %>
 
-<% a = ["seven", "five", "three", "four", "five"] %>
-<% b = ["six", "seven", "eight", "five", "twenty"] %>
+
+
+
+<hr>
+<% product_names = Array.new %>
+<% Fuel.all.each do |product|%>
+  <% product_names.push(product.id) %>
+<% end %>
+
+<%= product_names %>
+
+<% terminal_products = Array.new %>
+<% @the_facility.fuels.all.each do |term_fuel|%>
+  <% terminal_products.push(term_fuel.id) %>
+<% end %>
+<hr>
+<%= terminal_products %>
+
+
 
 <table class="table table-bordered">
   <tr>
     <th>Fuel</th>
-    <th>Add/ Delete Fuel</th>
+    <th>Add or Delete Fuel</th>
   </tr>
-<% b.each do |check|%>
+<% product_names.each do |check|%>
   <tr>
-    <td><%= check%> </td>
-    <% if a.include? check %>
-      <td>"keep"</td>
-    <% else %>
-     <td>
-      <button type="button" class="btn btn-danger">Remove Product from Terminal</button>
+    <td><%= Fuel.where({ :id => check}).at(0).name.capitalize %> </td>
+    <% if terminal_products.include? check %>
+        <% tank_number = Tank.where({ :terminal_id => @the_facility.id }).where({ :fuel_id => check }).at(0).id %>
+      <td>
+        <a type="button" class="btn btn-danger" href="/delete_tank/<%=tank_number%>">Remove Product from Terminal</a>
      </td>
+    <% else %>
+      <form id="add_tank" action="/insert_tank" method="post">
+        <input id="query_terminal_id" type="hidden" value="<%= @the_facility.id %>" name="query_terminal_id">
+        <input id="query_fuel_id" type="hidden" value="<%= check %>" name="query_fuel_id">
+        <input id="query_product_capacity" type="hidden" value=nil name="query_product_capacity">
+        <td>
+        <button id="add_tank" class="btn btn-primary">Add Product to Terminal</button>
+        </td>
+      </form>    
     <% end %>
   </tr>
 <% end %>
@@ -27,6 +58,35 @@
 
 
 
+
+
+<!-- 
+<div class="col-md-3">
+<% Fuel.all.each do |product|%>
+  <ul class="list-group">
+    <li class="list-group-item"><%=product.name.capitalize %></li>
+  </ul>
+<% end %>
+</div>
+
+
+
+<%= @the_facility.fuels.all.each do |test| %>
+  <p><% test.id %></p>
+<% end%>
+
+
+<% Fuel.all.each do |check_product|%>
+  <% @the_facility.fuels.each do |products|%>
+    <% if check_product.name = products.name %>
+      <p>yes</p>
+    <% else %>
+      <p>no</p>
+    <% end %>
+  <% end %>
+<% end %>
+
+-->
 
 
 
