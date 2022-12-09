@@ -282,12 +282,57 @@
 
   <div class="the_form">
     <label for="term_type_box">
-      Term type
+      Terminal type
     </label>
      <input type="text" id="term_type_box" name="query_term_type" value="<%= @the_facility.term_type %>">
    </div>
 
+    <div class="the_form">
+      <label for="term_type_box">Terminal type</label>
+      <select id="term_type_box" name="query_term_type">
+        <option selected><%=@the_facility.term_type %></option>
+        <option value="AFB TERMINAL">AFB TERMINAL</option>
+        <option value="AIRPORT">AIRPORT</option>
+        <option value="AIRPORT TERMINAL">AIRPORT TERMINAL</option>
+        <option value="ASPHALT PROCESSING">ASPHALT PROCESSING</option>
+        <option value="ASPHALT REFINERY">ASPHALT REFINERY</option>
+        <option value="ASPHALT REFINERY AND TERMINAL">ASPHALT REFINERY AND TERMINAL</option>
+        <option value="ASPHALT TERMINAL">ASPHALT TERMINAL</option>
+        <option value="BIODIESEL PLANT">BIODIESEL PLANT</option>
+        <option value="BREAKOUT TANKS">BREAKOUT TANKS</option>
+        <option value="BREAKOUT TANKS - CRUDE">BREAKOUT TANKS - CRUDE</option>
+        <option value="BREAKOUT TANKS - CRUDE AND PRODUCTS">BREAKOUT TANKS - CRUDE AND PRODUCTS</option>
+        <option value="BREAKOUT TANKS - PRODUCTS">BREAKOUT TANKS - PRODUCTS</option>
+        <option value="BULK">BULK</option>
+        <option value="BULK - RAILROAD TERMINAL">BULK - RAILROAD TERMINAL</option>
+        <option value="BULK TERMINAL">BULK TERMINAL</option>
+        <option value="CRUDE TERMINAL">CRUDE TERMINAL</option>
+        <option value="CRUDE UNDERGROUND CAVERNS">CRUDE UNDERGROUND CAVERNS</option>
+        <option value="ETHANOL BIOREFINERY">ETHANOL BIOREFINERY</option>
+        <option value="ETHANOL TERMINAL">ETHANOL TERMINAL</option>
+        <option value="EXCHANGE HUB">EXCHANGE HUB</option>
+        <option value="LNG TERMINAL">LNG TERMINAL</option>
+        <option value="LPG TERMINAL">LPG TERMINAL</option>
+        <option value="LPG UNDERGROUND CAVERNS">LPG UNDERGROUND CAVERNS</option>
+        <option value="MARINE AIRPORT TERMINAL">MARINE AIRPORT TERMINAL</option>
+        <option value="MARINE ASPHALT REFINERY">MARINE ASPHALT REFINERY</option>
+        <option value="MARINE TERMINAL">MARINE TERMINAL</option>
+        <option value="MARINE TERMINAL - ASPHALT">MARINE TERMINAL - ASPHALT</option>
+        <option value="MARINE TERMINAL - CRUDE">MARINE TERMINAL - CRUDE</option>
+        <option value="NG UNDERGROUND CAVERNS">NG UNDERGROUND CAVERNS</option>
+        <option value="NGL PLANT">NGL PLANT</option>
+        <option value="NGL TERMINAL">NGL TERMINAL</option>
+        <option value="PETROCHEMICAL TERMINAL">PETROCHEMICAL TERMINAL</option>
+        <option value="PETROLEUM BULK STATIONS AND TERMINALS">PETROLEUM BULK STATIONS AND TERMINALS</option>
+        <option value="PETROLEUM MERCHANT WHOLESALE">PETROLEUM MERCHANT WHOLESALE</option>
+        <option value="PROCESSING PLANT">PROCESSING PLANT</option>
+        <option value="REFINERY TERMINAL">REFINERY TERMINAL</option>
+        <option value="UNKNOWN">UNKNOWN</option>
+      </select>
+  </div>
+
    <div class="the_form">
+    <label for="status_box">Term status</label>
      <select id="status_box" name="query_status">
       <option selected><%=@the_facility.status %></option>
       <option value="IN SERVICE">IN SERVICE</option>
@@ -355,7 +400,7 @@
     <label for="capacity_box">
       Capacity
     </label>
-    <input type="text" id="capacity_box" name="query_capacity" value="<%= @the_facility.capacity %>">
+    <input type="number" id="capacity_box" name="query_capacity" value="<%= @the_facility.capacity %>">
    </div>
 
    <div class="the_form">

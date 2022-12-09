@@ -122,10 +122,10 @@ Rails.application.routes.draw do
   # Routes for the Facility resource:
 
   # CREATE
-  post("/insert_facility", { :controller => "facilities", :action => "create" })
+  # post("/insert_facility", { :controller => "facilities", :action => "create" })
           
   # READ
-  get("/facilities", { :controller => "facilities", :action => "index" })
+  # get("/facilities", { :controller => "facilities", :action => "index" })
   
   get("/facilities/:path_id", { :controller => "facilities", :action => "show" })
   
