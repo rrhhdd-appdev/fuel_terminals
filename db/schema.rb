@@ -10,6 +10,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_12_08_002523) do
+
+  create_table "companies", force: :cascade do |t|
+    t.string "company_name"
+    t.integer "users_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "facilities", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "phone"
+    t.string "term_type"
+    t.string "county"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "source"
+    t.string "website"
+    t.string "owner"
+    t.string "operator"
+    t.string "commodity"
+    t.integer "capacity"
+    t.string "parsel"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "zip4"
+    t.integer "tanks_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "countyfips"
+    t.string "status"
+    t.string "term_id"
+    t.string "truck_in"
+    t.string "truck_out"
+    t.string "marine_in"
+    t.string "marine_out"
+    t.string "rail_in"
+    t.string "rail_out"
+    t.string "pipe_in"
+    t.string "pipe_out"
+  end
+
+  create_table "fuels", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.integer "tanks_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tanks", force: :cascade do |t|
+    t.integer "terminal_id"
+    t.integer "fuel_id"
+    t.integer "product_capacity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "terminal_notes", force: :cascade do |t|
+    t.text "note"
+    t.integer "user_id"
+    t.integer "terminal_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "company_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

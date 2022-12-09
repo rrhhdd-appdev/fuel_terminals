@@ -1,0 +1,260 @@
+<h1>Terminal Search Results</h1>
+
+<!-- Basic market info/details (shown as cards) -->
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card text-center">
+        <div class="card-header">
+          Number of Terminals
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @matching_facilities.count %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card text-center">
+        <div class="card-header">
+          Total Storage Capacity (bbls)
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= number_with_delimiter(@capacity_sum, :delimiter => ',') %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Map showing each temrinal in the defined market -->
+  
+<div>
+  <div class="map" id="map" style='height: 500px;'></div>
+</div>
+
+<script>
+  function initMap() {
+    // initiate a new map
+   var mapDiv = document.getElementById('map');
+   var map = new google.maps.Map(mapDiv);
+
+
+    // An empty bounds variable for seeting automatic zoom level (bounds of map)
+    var bounds = new google.maps.LatLngBounds();
+
+    <% @matching_facilities.each do |place| %>
+
+      // Make info window for this place
+      var infowindow_<%= place.id %> = new google.maps.InfoWindow({
+        content: '<h6><b><%= place.name %></b><h6>' +
+                  '<br><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#emodal<%= place.id %>">Terminal Info</button>'
+      });
+
+      // Make marker for this place
+        var marker_<%= place.id %> = new google.maps.Marker({
+          position: {lat: <%= place.latitude %>, lng: <%= place.longitude %>},
+          map: map,
+          title: "<%= place.name %>",
+          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        });
+
+      // Click to show info window
+      marker_<%= place.id %>.addListener('click', function() {
+        infowindow_<%= place.id %>.open(map, marker_<%= place.id %>);
+      });
+
+      // Add this marker in map bounds
+      bounds.extend(new google.maps.LatLng(<%= place.latitude %>, <%= place.longitude %>));
+      
+    <% end %>
+
+    map.fitBounds(bounds);
+  };
+</script>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV.fetch("GMAPS_KEY")%>&callback=initMap"
+async defer></script>
+
+
+
+
+
+
+<!-- Cards for each temrinal in the defined market -->
+
+<div class="row">
+  <% @matching_facilities.each do |facility| %>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+              <%= facility.name %>
+        </div>
+        <div class="card-body">
+         <!-- <h5 class="card-title"><%= facility.name %></h5> -->
+          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+          <!-- Button trigger modal -->
+          <button type="button" id="bmodal<%= facility.id %>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#emodal<%= facility.id %>">
+            Terminal Info
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="emodal<%= facility.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="Modal<%= facility.id %>"><%= facility.name %></h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div><h5>Address</h5>
+                    <%= facility.address %> <br>
+                    <%= facility.city %>, <%= facility.state %> <%= facility.zip %>
+                  </div>
+                  <br>
+                  <div><h5>Logistics</h5>
+                    <table class="table table-bordered">
+                      <tr>
+                        <td></td>
+                        <th>In</th>
+                        <th>Out</th>
+                      </tr>
+                      <tr>
+                        <th>Pipe</th>
+                        <td><%= facility.pipe_in %></td>
+                        <td><%= facility.pipe_out %></td>
+                      </tr>
+                      <tr>
+                        <th>Truck</th>
+                        <td><%= facility.truck_in %></td>
+                        <td><%= facility.truck_out %></td>
+                      </tr>
+                      <tr>
+                        <th>Rail</th>
+                        <td><%= facility.rail_in %></td>
+                        <td><%= facility.rail_out %></td>
+                      </tr>
+                      <tr>
+                        <th>Marine</th>
+                        <td><%= facility.marine_in %></td>
+                        <td><%= facility.marine_out %></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <br>
+                  <% if facility.commodity != "NOT AVAILABLE" %>
+                    <div><h5>Products</h5>
+                      <%= facility.commodity %>
+                    </div>
+                    <br>
+                  <% end %>
+                  <div><h5>Capacity</h5>
+                    <%= number_with_delimiter(facility.capacity, :delimiter => ',') %>
+                  </div>
+                  <br>
+                  <% terminal_site = facility.website
+                      if terminal_site.include? "https://"
+                        terminal_site.slice! "https://"
+                      elsif terminal_site.include? "http://"
+                        terminal_site.slice! "http://"
+                      end %>
+                  <div><h5>Website</h5>
+                    <a href="http://<%= terminal_site %>" target="_blank" rel="noreferrer">Terminal's Website</a> 
+                  </div>
+                  <br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <a class="btn btn-primary" href="/facilities/<%= facility.id %>" role="button">Terminal Details</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+
+
+<!-- Change search parameters -->
+<hr>
+<div>
+  <h4>Change search:</h4>
+</div>
+
+
+<form action="/markets">
+  <div class="row g-3">
+    <div class="col-sm-5">
+      <label class="visually-hidden" for="city_name">City</label>
+      <input id="city_name" type="text" class="form-control" placeholder="City" aria-label="city" name="city">
+    </div>
+    <div class="col-sm">
+      <select class="form-select" aria-label="state" id="state_search" name="state">
+        <option selected id="state_search">State</option>
+          <% @state_list.each do |list|%>
+            <option value="<%=list%>"><%=list%></option>
+          <%end%>
+      </select>
+    </div>
+    <div class="col-sm">
+      <label class="visually-hidden" for="zip_num">Zip Code</label>
+      <input id="zip_num" type="integer" class="form-control" placeholder="Zip Code" aria-label="zip" name="zip">
+    </div>
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+
+<style>
+  .col-md-4{
+    margin-bottom: 20px;
+  }
+  
+  .col-md-6{
+    margin-bottom: 20px;
+  }
+  .map{
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  .card-title{
+    margin-bottom: 15px;
+  }
+  .col-auto{
+    padding-top: 10px;
+  }
+  
+</style>
+
+<!--
+
+    <%@state_list = Array.new
+    
+    Facility.all.each do |findstate|
+      current_state = findstate.state
+      if @state_list.include? current_state
+      else
+        @state_list.push(current_state)
+      end 
+    end%>
+<%=@state_list%>
+
+<hr>
+<%= Facility.all.where({ :state => "CA"})%>
+<hr>
+<%= @search_state %>
+<hr>
+
+<%= @testing_this %>
+<hr>
+
+<%= @testingthis %>
+
+-->

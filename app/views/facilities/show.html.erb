@@ -1,0 +1,526 @@
+<script>
+    document.write('<a href="' + document.referrer + '">Go Back</a>');
+</script>
+
+
+
+
+<div>
+  <h1><%= @the_facility.name.titleize %> Terminal Details</h1>
+</div>
+<hr>
+
+<div>
+  <h4>Basic Info</h4>
+</div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Owner
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.owner %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Operator
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.operator %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Status
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.status %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Capacity (bbls)
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.capacity %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Commodity
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.commodity %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Type
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.term_type %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div>
+  <h4>Contact Information</h4>
+</div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Address
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.address %><br><%= @the_facility.city %>, <%= @the_facility.state %> <%= @the_facility.zip %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Phone
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.phone %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          Company Website
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= @the_facility.website %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div>
+  <h4>Logistics</h4>
+</div>
+
+<div class="col-md-6">
+  <table class="table table-bordered table-striped table-responsive">
+    <tr>
+      <td></td>
+      <th>In</th>
+      <th>Out</th>
+    </tr>
+    <tr>
+      <th>Pipe</th>
+      <td><%= @the_facility.pipe_in %></td>
+      <td><%= @the_facility.pipe_out %></td>
+    </tr>
+    <tr>
+      <th>Truck</th>
+      <td><%= @the_facility.truck_in %></td>
+      <td><%= @the_facility.truck_out %></td>
+    </tr>
+    <tr>
+      <th>Rail</th>
+      <td><%= @the_facility.rail_in %></td>
+      <td><%= @the_facility.rail_out %></td>
+    </tr>
+    <tr>
+      <th>Marine</th>
+      <td><%= @the_facility.marine_in %></td>
+      <td><%= @the_facility.marine_out %></td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <h4>Products</h4>
+</div>
+
+<div class="col-md-3">
+<% @the_facility.fuels.each do |product|%>
+  <ul class="list-group">
+    <li class="list-group-item"><%=product.name.titleize %></li>
+  </ul>
+<% end %>
+</div>
+
+<br>
+
+<h2>Your Terminal Notes</h2>
+<hr>
+<div class="col-md-6">
+  <table class="table table-bordered table-striped table-responsive">
+    <tr>
+      <th>User</th>
+      <th>Note</th>
+      <th>Created at</th>
+      <th>Delete note</th>
+    </tr>
+    <% @list_of_terminal_notes.where( :terminal_id => @the_facility.id).each do |a_terminal_note| %>
+    <tr>
+      <% note_maker = a_terminal_note.user_id %>
+      <td><%= User.where( :id => note_maker ).at(0).first_name%></td>
+      <td><%= a_terminal_note.note %></td>
+      <td><%= time_ago_in_words(a_terminal_note.created_at) %> ago</td>
+      <td><a href="/delete_terminal_note/<%= a_terminal_note.id %>">Delete</td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+
+<h4>Add a new note about this terminal</h4>
+
+<div class="col-md-8">
+  <form action="/insert_terminal_note" method="post">
+    <input id="query_terminal_id" type="hidden" value="<%= @the_facility.id %>" name="query_terminal_id">
+    <textarea id="browser_note" rows="3" cols="60" name="query_note" placeholder="Enter note..."></textarea>
+    <button id="browser_note">Add note</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+<br>
+<h2>
+  Edit Terminal
+</h2>
+<hr>
+
+
+<h4>Update products offered at this terminal</h4>
+
+<% product_names = Array.new %>
+<% Fuel.all.each do |product|%>
+  <% product_names.push(product.id) %>
+<% end %>
+
+<% terminal_products = Array.new %>
+<% @the_facility.fuels.all.each do |term_fuel|%>
+  <% terminal_products.push(term_fuel.id) %>
+<% end %>
+
+<div class="col-md-6">
+  <table class="table table-bordered">
+    <tr>
+      <th>Fuel</th>
+      <th>Add or Delete Fuel</th>
+    </tr>
+  <% product_names.each do |check|%>
+    <tr>
+      <td><%= Fuel.where({ :id => check}).at(0).name.titleize %> </td>
+      <% if terminal_products.include? check %>
+          <% tank_number = Tank.where({ :terminal_id => @the_facility.id }).where({ :fuel_id => check }).at(0).id %>
+        <td>
+          <a type="button" class="btn btn-danger" href="/delete_tank/<%=tank_number%>">Remove Product from Terminal</a>
+      </td>
+      <% else %>
+        <form id="add_tank" action="/insert_tank" method="post">
+          <input id="query_terminal_id" type="hidden" value="<%= @the_facility.id %>" name="query_terminal_id">
+          <input id="query_fuel_id" type="hidden" value="<%= check %>" name="query_fuel_id">
+          <input id="query_product_capacity" type="hidden" value=nil name="query_product_capacity">
+          <td>
+          <button id="add_tank" class="btn btn-primary">Add Product to Terminal</button>
+          </td>
+        </form>    
+      <% end %>
+    </tr>
+  <% end %>
+  </table>
+</div>
+
+
+<h4>Edit Terminal Data</h4>
+
+<div>
+<form id="updating_the_facility" action="/modify_facility/<%= @the_facility.id %>"  method="post">
+   <div class="the_form">
+    <label for="name_box">
+       Name
+     </label>
+    <input type="text" id="name_box" name="query_name" value="<%= @the_facility.name %>">
+   </div>
+
+   <div class="the_form">
+     <label for="address_box">
+       Address
+    </label>
+     <input type="text" id="address_box" name="query_address" value="<%= @the_facility.address %>">
+   </div>
+
+   <div class="the_form">
+     <label for="phone_box">
+       Phone
+     </label>
+     <input type="text" id="phone_box" name="query_phone" value="<%= @the_facility.phone %>">
+  </div>
+
+  <div class="the_form">
+    <label for="term_type_box">
+      Terminal type
+    </label>
+     <input type="text" id="term_type_box" name="query_term_type" value="<%= @the_facility.term_type %>">
+   </div>
+
+    <div class="the_form">
+      <label for="term_type_box">Terminal type</label>
+      <select id="term_type_box" name="query_term_type">
+        <option selected><%=@the_facility.term_type %></option>
+        <option value="AFB TERMINAL">AFB TERMINAL</option>
+        <option value="AIRPORT">AIRPORT</option>
+        <option value="AIRPORT TERMINAL">AIRPORT TERMINAL</option>
+        <option value="ASPHALT PROCESSING">ASPHALT PROCESSING</option>
+        <option value="ASPHALT REFINERY">ASPHALT REFINERY</option>
+        <option value="ASPHALT REFINERY AND TERMINAL">ASPHALT REFINERY AND TERMINAL</option>
+        <option value="ASPHALT TERMINAL">ASPHALT TERMINAL</option>
+        <option value="BIODIESEL PLANT">BIODIESEL PLANT</option>
+        <option value="BREAKOUT TANKS">BREAKOUT TANKS</option>
+        <option value="BREAKOUT TANKS - CRUDE">BREAKOUT TANKS - CRUDE</option>
+        <option value="BREAKOUT TANKS - CRUDE AND PRODUCTS">BREAKOUT TANKS - CRUDE AND PRODUCTS</option>
+        <option value="BREAKOUT TANKS - PRODUCTS">BREAKOUT TANKS - PRODUCTS</option>
+        <option value="BULK">BULK</option>
+        <option value="BULK - RAILROAD TERMINAL">BULK - RAILROAD TERMINAL</option>
+        <option value="BULK TERMINAL">BULK TERMINAL</option>
+        <option value="CRUDE TERMINAL">CRUDE TERMINAL</option>
+        <option value="CRUDE UNDERGROUND CAVERNS">CRUDE UNDERGROUND CAVERNS</option>
+        <option value="ETHANOL BIOREFINERY">ETHANOL BIOREFINERY</option>
+        <option value="ETHANOL TERMINAL">ETHANOL TERMINAL</option>
+        <option value="EXCHANGE HUB">EXCHANGE HUB</option>
+        <option value="LNG TERMINAL">LNG TERMINAL</option>
+        <option value="LPG TERMINAL">LPG TERMINAL</option>
+        <option value="LPG UNDERGROUND CAVERNS">LPG UNDERGROUND CAVERNS</option>
+        <option value="MARINE AIRPORT TERMINAL">MARINE AIRPORT TERMINAL</option>
+        <option value="MARINE ASPHALT REFINERY">MARINE ASPHALT REFINERY</option>
+        <option value="MARINE TERMINAL">MARINE TERMINAL</option>
+        <option value="MARINE TERMINAL - ASPHALT">MARINE TERMINAL - ASPHALT</option>
+        <option value="MARINE TERMINAL - CRUDE">MARINE TERMINAL - CRUDE</option>
+        <option value="NG UNDERGROUND CAVERNS">NG UNDERGROUND CAVERNS</option>
+        <option value="NGL PLANT">NGL PLANT</option>
+        <option value="NGL TERMINAL">NGL TERMINAL</option>
+        <option value="PETROCHEMICAL TERMINAL">PETROCHEMICAL TERMINAL</option>
+        <option value="PETROLEUM BULK STATIONS AND TERMINALS">PETROLEUM BULK STATIONS AND TERMINALS</option>
+        <option value="PETROLEUM MERCHANT WHOLESALE">PETROLEUM MERCHANT WHOLESALE</option>
+        <option value="PROCESSING PLANT">PROCESSING PLANT</option>
+        <option value="REFINERY TERMINAL">REFINERY TERMINAL</option>
+        <option value="UNKNOWN">UNKNOWN</option>
+      </select>
+  </div>
+
+   <div class="the_form">
+    <label for="status_box">Term status</label>
+     <select id="status_box" name="query_status">
+      <option selected><%=@the_facility.status %></option>
+      <option value="IN SERVICE">IN SERVICE</option>
+      <option value="NOT IN USE">NOT IN USE</option>
+      <option value="DISMANTLED">DISMANTLED</option>
+    </select>
+  </div>
+
+   <div class="the_form">
+     <label for="county_box">
+       County
+     </label>
+     <input type="text" id="county_box" name="query_county" value="<%= @the_facility.county %>">
+   </div>
+
+   <div class="the_form">
+     <label for="latitude_box">
+       Latitude
+     </label>
+     <input type="text" id="latitude_box" name="query_latitude" value="<%= @the_facility.latitude %>">
+   </div>
+
+   <div class="the_form">
+    <label for="longitude_box">
+      Longitude
+     </label>
+    <input type="text" id="longitude_box" name="query_longitude" value="<%= @the_facility.longitude %>">
+   </div>
+
+   <div class="the_form">
+    <label for="source_box">
+       Source
+     </label>
+     <input type="text" id="source_box" name="query_source" value="<%= @the_facility.source %>">
+   </div>
+
+   <div class="the_form">
+     <label for="website_box">
+      Website
+     </label>
+     <input type="text" id="website_box" name="query_website" value="<%= @the_facility.website %>">
+   </div>
+
+  <div class="the_form">
+     <label for="owner_box">
+       Owner
+     </label>
+     <input type="text" id="owner_box" name="query_owner" value="<%= @the_facility.owner %>">
+  </div>
+   <div class="the_form">
+    <label for="operator_box">
+      Operator
+    </label>
+     <input type="text" id="operator_box" name="query_operator" value="<%= @the_facility.operator %>">
+   </div>
+
+  <div class="the_form">
+     <label for="commodity_box">
+      Commodity
+     </label>
+    <input type="text" id="commodity_box" name="query_commodity" value="<%= @the_facility.commodity %>">
+   </div>
+
+   <div class="the_form">
+    <label for="capacity_box">
+      Capacity
+    </label>
+    <input type="number" id="capacity_box" name="query_capacity" value="<%= @the_facility.capacity %>">
+   </div>
+
+   <div class="the_form">
+    <input type="hidden" id="truck_in_box" name="query_truck_in" value="NO" />
+    <input type="checkbox" id="truck_in_box" name="query_truck_in" value="YES" <%="checked" if @the_facility.truck_in == "YES" %>>
+    <label for="truck_in_box">
+         Truck in
+     </label>
+   </div>
+
+   <div class="the_form">
+    <input type="hidden" id="truck_out_box" name="query_truck_out" value="NO" />
+    <input type="checkbox" id="truck_out_box" name="query_truck_out" value="YES" <%="checked" if @the_facility.truck_out == "YES" %>>
+     <label for="truck_out_box">
+        Truck out
+    </label>
+  </div>
+
+  <div class="the_form">
+    <input type="hidden" id="pipe_in_box" name="query_pipe_in" value="NO" />
+    <input type="checkbox" id="pipe_in_box" name="query_pipe_in" value="YES" <%="checked" if @the_facility.pipe_in == "YES" %>>
+     <label for="pipe_in_box">
+         Pipe in
+    </label>
+   </div>
+
+   <div class="the_form">
+    <input type="hidden" id="pipe_out_box" name="query_pipe_out" value="NO" />
+    <input type="checkbox" id="pipe_out_box" name="query_pipe_out" value="YES" <%="checked" if @the_facility.pipe_out == "YES" %>>
+    <label for="pipe_out_box">
+        Pipe out
+    </label>
+  </div>
+
+  <div class="the_form">
+    <input type="hidden" id="marine_in_box" name="query_marine_in" value="NO" />
+    <input type="checkbox" id="marine_in_box" name="query_marine_in" value="YES" <%="checked" if @the_facility.marine_in == "YES" %>>
+    <label for="marine_in_box">
+        Marine in
+    </label>
+  </div>
+
+  <div class="the_form">
+    <input type="hidden" id="marin_out_box" name="query_marine_out" value="NO" />
+    <input type="checkbox" id="marin_out_box" name="query_marine_out" value="YES" <%="checked" if @the_facility.marine_out == "YES" %>>
+    <label for="marine_out_box">
+        Marine out
+     </label>
+   </div>
+
+  <div class="the_form">
+    <input type="hidden" id="rail_in_box" name="query_rail_in" value="NO" />
+     <input type="checkbox" id="rail_in_box" name="query_rail_in" value="YES" <%="checked" if @the_facility.rail_in == "YES" %>>
+     <label for="rail_in_box">
+         Rail in
+     </label>
+  </div>
+
+  <div class="the_form">
+    <input type="hidden" id="rail_out_box" name="query_rail_out" value="NO" />
+    <input type="checkbox" id="rail_out_box" name="query_rail_out" value="YES" <%="checked" if @the_facility.rail_out == "YES" %>>
+    <label for="rail_out_box">
+        Rail out
+    </label>
+  </div>
+
+   <div class="the_form">
+     <label for="parsel_box">
+       Parsel
+     </label>
+    <input type="text" id="parsel_box" name="query_parsel" value="<%= @the_facility.parsel %>">
+   </div>
+
+   <div class="the_form">
+     <label for="city_box">
+       City
+     </label>
+     <input type="text" id="city_box" name="query_city" value="<%= @the_facility.city %>">
+   </div>
+
+   <div class="the_form">
+     <label for="state_box">
+       State
+     </label>
+    <input type="text" id="state_box" name="query_state" value="<%= @the_facility.state %>">
+  </div>
+
+   <div class="the_form">
+     <label for="zip_box">
+      Zip
+    </label>
+     <input type="text" id="zip_box" name="query_zip" value="<%= @the_facility.zip %>">
+   </div>
+
+   <div class="the_form">
+    <label for="zip4_box">
+       Zip4
+    </label>
+    <input type="text" id="zip4_box" name="query_zip4" value="<%= @the_facility.zip4 %>">
+   </div>
+
+   <button id="updating_the_facility">
+    Update Terminal
+   </button>
+</form>
+</div>
+
+<br>
+<div>
+  <a href="/delete_facility/<%= @the_facility.id %>">
+    Delete Terminal
+  </a>
+</div>
+
+
+<style>
+  .col-md-4{
+    margin-bottom: 20px;
+  }
+  .the_form{
+    margin-bottom: 5px;
+  }
+</style>

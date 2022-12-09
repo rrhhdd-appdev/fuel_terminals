@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Tank #<%= @the_tank.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/tanks">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_tank/<%= @the_tank.id %>">
+          Delete tank
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Terminal
+      </dt>
+      <dd>
+        <%= @the_tank.terminal_id %>
+      </dd>
+
+      <dt>
+        Fuel
+      </dt>
+      <dd>
+        <%= @the_tank.fuel_id %>
+      </dd>
+
+      <dt>
+        Product capacity
+      </dt>
+      <dd>
+        <%= @the_tank.product_capacity %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_tank.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_tank.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit tank
+    </h2>
+
+    <form action="/modify_tank/<%= @the_tank.id %>"  method="post" >
+      <div>
+        <label for="terminal_id_box">
+          Terminal
+        </label>
+
+        <input type="text" id="terminal_id_box" name="query_terminal_id" value="<%= @the_tank.terminal_id %>">
+      </div>
+
+      <div>
+        <label for="fuel_id_box">
+          Fuel
+        </label>
+
+        <input type="text" id="fuel_id_box" name="query_fuel_id" value="<%= @the_tank.fuel_id %>">
+      </div>
+
+      <div>
+        <label for="product_capacity_box">
+          Product capacity
+        </label>
+
+        <input type="text" id="product_capacity_box" name="query_product_capacity" value="<%= @the_tank.product_capacity %>">
+      </div>
+
+      <button>
+        Update tank
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

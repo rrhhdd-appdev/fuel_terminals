@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all terminal notes
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new terminal note
+    </h2>
+
+    <form action="/insert_terminal_note" method="post">
+      <div>
+        <label for="note_box">
+          Note
+        </label>
+
+        <textarea id="note_box" name="query_note" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="terminal_id_box">
+          Terminal
+        </label>
+
+        <input type="text" id="terminal_id_box" name="query_terminal_id">
+      </div>
+
+      <button>
+        Create terminal note
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Note
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Terminal
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_terminal_notes.each do |a_terminal_note| %>
+      <tr>
+        <td>
+          <%= a_terminal_note.id %>
+        </td>
+
+        <td>
+          <%= a_terminal_note.note %>
+        </td>
+
+        <td>
+          <%= a_terminal_note.user_id %>
+        </td>
+
+        <td>
+          <%= a_terminal_note.terminal_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_terminal_note.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_terminal_note.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/terminal_notes/<%= a_terminal_note.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
