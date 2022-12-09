@@ -1,3 +1,35 @@
+
+
+<% a = ["seven", "five", "three", "four", "five"] %>
+<% b = ["six", "seven", "eight", "five", "twenty"] %>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Fuel</th>
+    <th>Add/ Delete Fuel</th>
+  </tr>
+<% b.each do |check|%>
+  <tr>
+    <td><%= check%> </td>
+    <% if a.include? check %>
+      <td>"keep"</td>
+    <% else %>
+     <td>
+      <button type="button" class="btn btn-danger">Remove Product from Terminal</button>
+     </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+
+
+
+
+
+
+
+
 <div>
   <h1><%= @the_facility.name %> Terminal Details</h1>
 </div>
@@ -212,7 +244,6 @@
     <label for="name_box">
        Name
      </label>
-
     <input type="text" id="name_box" name="query_name" value="<%= @the_facility.name %>">
    </div>
 
@@ -220,7 +251,6 @@
      <label for="address_box">
        Address
     </label>
-
      <input type="text" id="address_box" name="query_address" value="<%= @the_facility.address %>">
    </div>
 
@@ -228,7 +258,6 @@
      <label for="phone_box">
        Phone
      </label>
-
      <input type="text" id="phone_box" name="query_phone" value="<%= @the_facility.phone %>">
   </div>
 
@@ -236,7 +265,6 @@
     <label for="term_type_box">
       Term type
     </label>
-
      <input type="text" id="term_type_box" name="query_term_type" value="<%= @the_facility.term_type %>">
    </div>
 
