@@ -143,10 +143,12 @@ async defer></script>
                     </table>
                   </div>
                   <br>
-                  <div><h5>Products</h5>
-                    <%= facility.commodity %> 
-                  </div>
-                  <br>
+                  <% if facility.commodity != "NOT AVAILABLE" %>
+                    <div><h5>Products</h5>
+                      <%= facility.commodity %>
+                    </div>
+                    <br>
+                  <% end %>
                   <div><h5>Capacity</h5>
                     <%= number_with_delimiter(facility.capacity, :delimiter => ',') %>
                   </div>

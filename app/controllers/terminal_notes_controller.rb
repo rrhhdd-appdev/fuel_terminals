@@ -26,9 +26,9 @@ class TerminalNotesController < ApplicationController
 
     if the_terminal_note.valid?
       the_terminal_note.save
-      redirect_to("/terminal_notes", { :notice => "Terminal note created successfully." })
+      redirect_to("/facilities/#{the_terminal_note.terminal_id}", { :notice => "Terminal note was added." })
     else
-      redirect_to("/terminal_notes", { :alert => the_terminal_note.errors.full_messages.to_sentence })
+      redirect_to("/facilities/#{the_terminal_note.terminal_id}", { :alert => the_terminal_note.errors.full_messages.to_sentence })
     end
   end
 
@@ -54,6 +54,6 @@ class TerminalNotesController < ApplicationController
 
     the_terminal_note.destroy
 
-    redirect_to("/terminal_notes", { :notice => "Terminal note deleted successfully."} )
+    redirect_to("/facilities/#{the_terminal_note.terminal_id}", { :notice => "Note deleted."} )
   end
 end
