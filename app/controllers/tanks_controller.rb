@@ -25,9 +25,9 @@ class TanksController < ApplicationController
 
     if the_tank.valid?
       the_tank.save
-      redirect_to("/tanks", { :notice => "Tank created successfully." })
+      redirect_to("/facilities/#{the_tank.terminal_id}", { :notice => "Tank created successfully." })
     else
-      redirect_to("/tanks", { :alert => the_tank.errors.full_messages.to_sentence })
+      redirect_to("/facilities/#{the_tank.terminal_id}", { :alert => the_tank.errors.full_messages.to_sentence })
     end
   end
 
@@ -50,9 +50,10 @@ class TanksController < ApplicationController
   def destroy
     the_id = params.fetch("path_id")
     the_tank = Tank.where({ :id => the_id }).at(0)
+    the_facility = the_tank.terminal_id
 
     the_tank.destroy
 
-    redirect_to("/tanks", { :notice => "Tank deleted successfully."} )
+    redirect_to("/facilities/#{the_facility}", { :notice => "Tank deleted successfully."} )
   end
 end
