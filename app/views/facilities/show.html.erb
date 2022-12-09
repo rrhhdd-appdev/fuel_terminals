@@ -163,118 +163,40 @@
     </div>
   </div>
 
+
 <div>
-  <h4>Contact Information</h4>
+  <h4>Logistics</h4>
 </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-header">
-          Address
-        </div>
-        <div class="card-body">
-          <p class="card-text"><%= @the_facility.address %></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-header">
-          Phone
-        </div>
-        <div class="card-body">
-          <p class="card-text"><%= @the_facility.phone %></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-header">
-          Company Website
-        </div>
-        <div class="card-body">
-          <p class="card-text"><%= @the_facility.website %></p>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="col-md-6">
+<table class="table table-bordered table-striped table-responsive">
+  <tr>
+    <td></td>
+    <th>In</th>
+    <th>Out</th>
+   </tr>
+   <tr>
+     <th>Pipe</th>
+    <td><%= @the_facility.pipe_in %></td>
+    <td><%= @the_facility.pipe_out %></td>
+  </tr>
+  <tr>
+    <th>Truck</th>
+    <td><%= @the_facility.truck_in %></td>
+    <td><%= @the_facility.truck_out %></td>
+   </tr>
+   <tr>
+    <th>Rail</th>
+    <td><%= @the_facility.rail_in %></td>
+     <td><%= @the_facility.rail_out %></td>
+  </tr>
+  <tr>
+     <th>Marine</th>
+    <td><%= @the_facility.marine_in %></td>
+    <td><%= @the_facility.marine_out %></td>
+  </tr>
+</table>
 
-
-
-
-      <dt>
-        Source
-      </dt>
-      <dd>
-        <%= @the_facility.source %>
-      </dd>
-
-
- 
-
-      <dt>
-        Truck in
-      </dt>
-      <dd>
-        <%= @the_facility.truck_in %>
-      </dd>
-
-      <dt>
-        Truck out
-      </dt>
-      <dd>
-        <%= @the_facility.truck_out %>
-      </dd>
-
-      <dt>
-        Pipe in
-      </dt>
-      <dd>
-        <%= @the_facility.pipe_in %>
-      </dd>
-
-      <dt>
-        Pipe out
-      </dt>
-      <dd>
-        <%= @the_facility.pipe_out %>
-      </dd>
-
-      <dt>
-        Marine in
-      </dt>
-      <dd>
-        <%= @the_facility.marine_in %>
-      </dd>
-
-      <dt>
-        Marin out
-      </dt>
-      <dd>
-        <%= @the_facility.marine_out %>
-      </dd>
-
-      <dt>
-        Rail in
-      </dt>
-      <dd>
-        <%= @the_facility.rail_in %>
-      </dd>
-
-      <dt>
-        Rail out
-      </dt>
-      <dd>
-        <%= @the_facility.rail_out %>
-      </dd>
-
-      <dt>
-        Parsel
-      </dt>
-      <dd>
-        <%= @the_facility.parsel %>
-      </dd>
 
 
 <hr>
