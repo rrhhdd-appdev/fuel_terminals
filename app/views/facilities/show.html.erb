@@ -145,6 +145,18 @@
   </table>
 </div>
 
+<div>
+  <h4>Products</h4>
+</div>
+
+<div class="col-md-3">
+<% @the_facility.fuels.each do |product|%>
+  <ul class="list-group">
+    <li class="list-group-item"><%=product.name.capitalize %></li>
+  </ul>
+<% end %>
+</div>
+
 <br>
 
 <h2>Your Terminal Notes</h2>

@@ -15,10 +15,15 @@ class FacilitiesController < ApplicationController
     @the_facility = matching_facilities.at(0)
 
 
+    # To get the signed in user's terminal notes
+
     user_id = session.fetch(:user_id)
     matching_terminal_notes = TerminalNote.all.where( :user => user_id)
 
     @list_of_terminal_notes = matching_terminal_notes.order({ :created_at => :desc })
+
+    # To get the available products
+    
 
     render({ :template => "facilities/show.html.erb" })
   end

@@ -11,4 +11,5 @@
 #
 class Fuel < ApplicationRecord
   has_many(:tanks, { :class_name => "Tank", :foreign_key => "fuel_id", :dependent => :destroy })
+  has_many(:terminals, { :through => :tanks, :source => :terminal })
 end
