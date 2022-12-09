@@ -147,7 +147,7 @@
 
 <hr>
 
-<h2>Terminal Notes</h2>
+<h2>Your Terminal Notes</h2>
 
 <div class="col-md-6">
   <table class="table table-bordered table-striped table-responsive">
@@ -184,13 +184,6 @@
 <hr>
 
 
-<div>
-  <div>
-    <a href="/delete_facility/<%= @the_facility.id %>">
-      Delete facility
-    </a>
-  </div>
-</div>
 
 
 
@@ -198,9 +191,11 @@
 <h2>
   Edit facility
 </h2>
+<br>
 
+<div>
 <form id="updating_the_facility" action="/modify_facility/<%= @the_facility.id %>"  method="post">
-   <div>
+   <div class="the_form">
     <label for="name_box">
        Name
      </label>
@@ -208,7 +203,7 @@
     <input type="text" id="name_box" name="query_name" value="<%= @the_facility.name %>">
    </div>
 
-   <div>
+   <div class="the_form">
      <label for="address_box">
        Address
     </label>
@@ -216,7 +211,7 @@
      <input type="text" id="address_box" name="query_address" value="<%= @the_facility.address %>">
    </div>
 
-   <div>
+   <div class="the_form">
      <label for="phone_box">
        Phone
      </label>
@@ -224,7 +219,7 @@
      <input type="text" id="phone_box" name="query_phone" value="<%= @the_facility.phone %>">
   </div>
 
-  <div>
+  <div class="the_form">
     <label for="term_type_box">
       Term type
     </label>
@@ -232,208 +227,195 @@
      <input type="text" id="term_type_box" name="query_term_type" value="<%= @the_facility.term_type %>">
    </div>
 
-   <div>
-    <label for="status_box">
-         Status
-     </label>
-     <input type="text" id="status_box" name="query_status" value="<%=@the_facility.status %>">
+   <div class="the_form">
+     <select id="status_box" name="query_status">
+      <option selected><%=@the_facility.status %></option>
+      <option value="IN SERVICE">IN SERVICE</option>
+      <option value="NOT IN USE">NOT IN USE</option>
+      <option value="DISMANTLED">DISMANTLED</option>
+    </select>
   </div>
 
-   <div>
+   <div class="the_form">
      <label for="county_box">
        County
      </label>
-
      <input type="text" id="county_box" name="query_county" value="<%= @the_facility.county %>">
    </div>
 
-   <div>
+   <div class="the_form">
      <label for="latitude_box">
        Latitude
      </label>
-
      <input type="text" id="latitude_box" name="query_latitude" value="<%= @the_facility.latitude %>">
    </div>
 
-   <div>
+   <div class="the_form">
     <label for="longitude_box">
       Longitude
      </label>
-
     <input type="text" id="longitude_box" name="query_longitude" value="<%= @the_facility.longitude %>">
    </div>
 
-   <div>
+   <div class="the_form">
     <label for="source_box">
        Source
      </label>
-
      <input type="text" id="source_box" name="query_source" value="<%= @the_facility.source %>">
    </div>
 
-   <div>
+   <div class="the_form">
      <label for="website_box">
       Website
      </label>
-
      <input type="text" id="website_box" name="query_website" value="<%= @the_facility.website %>">
    </div>
 
-  <div>
+  <div class="the_form">
      <label for="owner_box">
        Owner
      </label>
-
      <input type="text" id="owner_box" name="query_owner" value="<%= @the_facility.owner %>">
   </div>
-   <div>
+   <div class="the_form">
     <label for="operator_box">
       Operator
     </label>
-
      <input type="text" id="operator_box" name="query_operator" value="<%= @the_facility.operator %>">
    </div>
 
-  <div>
+  <div class="the_form">
      <label for="commodity_box">
       Commodity
      </label>
-
     <input type="text" id="commodity_box" name="query_commodity" value="<%= @the_facility.commodity %>">
    </div>
 
-   <div>
+   <div class="the_form">
     <label for="capacity_box">
       Capacity
     </label>
-
     <input type="text" id="capacity_box" name="query_capacity" value="<%= @the_facility.capacity %>">
    </div>
 
-   <div>
-     <input type="checkbox" id="truck_in_box" name="query_truck_in" value="1" <%= "checked" if @the_facility.truck_in %>>
-
+   <div class="the_form">
+    <input type="hidden" id="truck_in_box" name="query_truck_in" value="NO" />
+    <input type="checkbox" id="truck_in_box" name="query_truck_in" value="YES" <%="checked" if @the_facility.truck_in == "YES" %>>
     <label for="truck_in_box">
          Truck in
      </label>
    </div>
 
-   <div>
-     <input type="checkbox" id="truck_out_box" name="query_truck_out" value="1<%= "checked" if @the_facility.truck_out %>>
-
+   <div class="the_form">
+    <input type="hidden" id="truck_out_box" name="query_truck_out" value="NO" />
+    <input type="checkbox" id="truck_out_box" name="query_truck_out" value="YES" <%="checked" if @the_facility.truck_out == "YES" %>>
      <label for="truck_out_box">
         Truck out
     </label>
   </div>
 
-  <div>
-     <input type="checkbox" id="pipe_in_box" name="query_pipe_in" value="1" <%= "checked" if @the_facility.pipe_in %>>
-
+  <div class="the_form">
+    <input type="hidden" id="pipe_in_box" name="query_pipe_in" value="NO" />
+    <input type="checkbox" id="pipe_in_box" name="query_pipe_in" value="YES" <%="checked" if @the_facility.pipe_in == "YES" %>>
      <label for="pipe_in_box">
          Pipe in
     </label>
    </div>
 
-   <div>
-    <input type="checkbox" id="pipe_out_box" name="query_pipe_out" value="1" <%= "checked" if @the_facility.pipe_out %>>
-
+   <div class="the_form">
+    <input type="hidden" id="pipe_out_box" name="query_pipe_out" value="NO" />
+    <input type="checkbox" id="pipe_out_box" name="query_pipe_out" value="YES" <%="checked" if @the_facility.pipe_out == "YES" %>>
     <label for="pipe_out_box">
         Pipe out
     </label>
   </div>
 
-  <div>
-    <input type="checkbox" id="marine_in_box" name="query_marine_in" value="1<%= "checked" if @the_facility.marine_in %>>
-
+  <div class="the_form">
+    <input type="hidden" id="marine_in_box" name="query_marine_in" value="NO" />
+    <input type="checkbox" id="marine_in_box" name="query_marine_in" value="YES" <%="checked" if @the_facility.marine_in == "YES" %>>
     <label for="marine_in_box">
         Marine in
     </label>
   </div>
 
-  <div>
-    <input type="checkbox" id="marin_out_box" name="query_marine_out" value="1<%= "checked" if @the_facility.marine_out %>>
-
+  <div class="the_form">
+    <input type="hidden" id="marin_out_box" name="query_marine_out" value="NO" />
+    <input type="checkbox" id="marin_out_box" name="query_marine_out" value="YES" <%="checked" if @the_facility.marine_out == "YES" %>>
     <label for="marine_out_box">
         Marine out
      </label>
    </div>
 
-  <div>
-     <input type="checkbox" id="rail_in_box" name="query_rail_in" value="1" <%"checked" if @the_facility.rail_in %>>
-
+  <div class="the_form">
+    <input type="hidden" id="rail_in_box" name="query_rail_in" value="NO" />
+     <input type="checkbox" id="rail_in_box" name="query_rail_in" value="YES" <%="checked" if @the_facility.rail_in == "YES" %>>
      <label for="rail_in_box">
          Rail in
      </label>
   </div>
 
-  <div>
-    <input type="checkbox" id="rail_out_box" name="query_rail_out" value="1" <%"checked" if @the_facility.rail_out %>>
-
+  <div class="the_form">
+    <input type="hidden" id="rail_out_box" name="query_rail_out" value="NO" />
+    <input type="checkbox" id="rail_out_box" name="query_rail_out" value="YES" <%="checked" if @the_facility.rail_out == "YES" %>>
     <label for="rail_out_box">
         Rail out
     </label>
   </div>
 
-   <div>
+   <div class="the_form">
      <label for="parsel_box">
        Parsel
      </label>
-
     <input type="text" id="parsel_box" name="query_parsel" value="<%= @the_facility.parsel %>">
    </div>
 
-   <div>
+   <div class="the_form">
      <label for="city_box">
        City
      </label>
-
      <input type="text" id="city_box" name="query_city" value="<%= @the_facility.city %>">
    </div>
 
-   <div>
+   <div class="the_form">
      <label for="state_box">
        State
      </label>
-
     <input type="text" id="state_box" name="query_state" value="<%= @the_facility.state %>">
   </div>
 
-   <div>
+   <div class="the_form">
      <label for="zip_box">
       Zip
     </label>
-
      <input type="text" id="zip_box" name="query_zip" value="<%= @the_facility.zip %>">
    </div>
 
-   <div>
+   <div class="the_form">
     <label for="zip4_box">
        Zip4
     </label>
-
     <input type="text" id="zip4_box" name="query_zip4" value="<%= @the_facility.zip4 %>">
-   </div>
-
-   <div>
-     <label for="tanks_count_box">
-      Tanks count
-    </label>
-
-    <input type="text" id="tanks_count_box" name="query_tanks_count" value="<%= @the_facility.tanks_count %>">
    </div>
 
    <button id="updating_the_facility">
     Update facility
    </button>
 </form>
+</div>
 
-
-
-
+<br>
+<div>
+  <a href="/delete_facility/<%= @the_facility.id %>">
+    Delete facility
+  </a>
+</div>
 
 
 <style>
   .col-md-4{
     margin-bottom: 20px;
+  }
+  .the_form{
+    margin-bottom: 5px;
   }
 </style>
