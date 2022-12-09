@@ -8,7 +8,6 @@ class MarketsController < ApplicationController
     @the_state = params.fetch("state")
     @the_zip = params.fetch("zip")
 
-    
     query_filters = Hash.new
 
       if @the_city != ""
@@ -23,7 +22,6 @@ class MarketsController < ApplicationController
 
     @matching_facilities = Facility.where(query_filters)
     
-
     
     @state_list = Array.new
     
@@ -34,16 +32,6 @@ class MarketsController < ApplicationController
         @state_list.push(current_state)
       end 
     end
-    
-      
-    
-    
-    # @matching_facilities = Facility.where({ :city => @the_city, :state => @the_state, :zip => @the_zip })
-
-
-
-
-
 
     @capacity_sum = 0
     @matching_facilities.each do |add_cap|
@@ -52,45 +40,8 @@ class MarketsController < ApplicationController
 
     render({ :template => "markets/index.html.erb" })
 
-
-        # matching_fuels = Fuel.all
-    # @list_of_fuels = matching_fuels.order({ :created_at => :desc })
-
-    # if @the_city.empty?
-    #   if @the_state.empty?
-    #     if @the_zip.empty?
-    #       @matching_facilities = Facility.all
-    #     else 
-    #       @matching_facilities = Facility.where({ :zip => @the_zip})
-    #     end
-    #   else
-      
-    #   end
-    # end
-
-       # if @the_city != nil
-    #   # if @the_state !=nil 
-    # @matching_facilities = Facility.where({ :city => @the_city, :state => @the_state, :zip => @the_zip })
-    # else
-      
-    # else
-    #   @matching_facilities = Facility.where({ :city => @the_city})
-    # end
-
-    # @matching_facilities = Facility.where({ :city => @the_city })
-
-
-
-    # if @the_state != nil
-    #   @matching_facilities = Facility.where({ :state => @the_state })
-    # end
-
-
   end
  
-
-
-
   def show
     the_state = params.fetch("path_id")
 

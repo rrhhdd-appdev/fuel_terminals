@@ -57,7 +57,7 @@ class FacilitiesController < ApplicationController
     the_facility.state = params.fetch("query_state")
     the_facility.zip = params.fetch("query_zip")
     the_facility.zip4 = params.fetch("query_zip4")
-    the_facility.tanks_count = params.fetch("query_tanks_count")
+
 
     if the_facility.valid?
       the_facility.save
@@ -98,7 +98,7 @@ class FacilitiesController < ApplicationController
     the_facility.state = params.fetch("query_state")
     the_facility.zip = params.fetch("query_zip")
     the_facility.zip4 = params.fetch("query_zip4")
-    the_facility.tanks_count = params.fetch("query_tanks_count")
+
 
     if the_facility.valid?
       the_facility.save

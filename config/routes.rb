@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   # Route for Markets views
   
   get("/markets", { :controller => "markets", :action => "index" })
-  get("/markets/:path_id", { :controller => "markets", :action => "show" })
-  post("/search_market", { :controller => "markets", :action => "search" })
+  # get("/markets/:path_id", { :controller => "markets", :action => "show" })
+  # post("/search_market", { :controller => "markets", :action => "search" })
 
   #-------------------------
 
@@ -49,9 +49,9 @@ Rails.application.routes.draw do
   post("/insert_tank", { :controller => "tanks", :action => "create" })
           
   # READ
-  get("/tanks", { :controller => "tanks", :action => "index" })
+  # get("/tanks", { :controller => "tanks", :action => "index" })
   
-  get("/tanks/:path_id", { :controller => "tanks", :action => "show" })
+  # get("/tanks/:path_id", { :controller => "tanks", :action => "show" })
   
   # UPDATE
   
@@ -70,7 +70,7 @@ Rails.application.routes.draw do
   # READ
   get("/fuels", { :controller => "fuels", :action => "index" })
   
-  get("/fuels/:path_id", { :controller => "fuels", :action => "show" })
+  # get("/fuels/:path_id", { :controller => "fuels", :action => "show" })
   
   # UPDATE
   
@@ -84,19 +84,19 @@ Rails.application.routes.draw do
   # Routes for the Company resource:
 
   # CREATE
-  post("/insert_company", { :controller => "companies", :action => "create" })
+  # post("/insert_company", { :controller => "companies", :action => "create" })
           
   # READ
-  get("/companies", { :controller => "companies", :action => "index" })
+  # get("/companies", { :controller => "companies", :action => "index" })
   
-  get("/companies/:path_id", { :controller => "companies", :action => "show" })
+  # get("/companies/:path_id", { :controller => "companies", :action => "show" })
   
   # UPDATE
   
-  post("/modify_company/:path_id", { :controller => "companies", :action => "update" })
+  # post("/modify_company/:path_id", { :controller => "companies", :action => "update" })
   
   # DELETE
-  get("/delete_company/:path_id", { :controller => "companies", :action => "destroy" })
+  # get("/delete_company/:path_id", { :controller => "companies", :action => "destroy" })
 
   #------------------------------
 
@@ -106,9 +106,9 @@ Rails.application.routes.draw do
   post("/insert_terminal_note", { :controller => "terminal_notes", :action => "create" })
           
   # READ
-  get("/terminal_notes", { :controller => "terminal_notes", :action => "index" })
+  # get("/terminal_notes", { :controller => "terminal_notes", :action => "index" })
   
-  get("/terminal_notes/:path_id", { :controller => "terminal_notes", :action => "show" })
+  # get("/terminal_notes/:path_id", { :controller => "terminal_notes", :action => "show" })
   
   # UPDATE
   
