@@ -54,7 +54,7 @@
 
       // Make info window for this place
       var infowindow_<%= place.id %> = new google.maps.InfoWindow({
-        content: '<a href="/facilities/<%= place.id %>"> <%= place.name %></a>'
+        content: '<a href="/facilities/<%= place.id %>" target="_blank"> <%= place.name %></a>'
       });
 
       // Make marker for this place
