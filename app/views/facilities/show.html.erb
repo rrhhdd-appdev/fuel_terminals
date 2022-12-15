@@ -54,7 +54,7 @@
           Capacity (bbls)
         </div>
         <div class="card-body">
-          <p class="card-text"><%= @the_facility.capacity %></p>
+          <p class="card-text"><%= number_with_delimiter(facility.capacity, :delimiter => ',') %></p>
         </div>
       </div>
     </div>
