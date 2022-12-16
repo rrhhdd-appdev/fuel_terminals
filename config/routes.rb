@@ -125,7 +125,7 @@ Rails.application.routes.draw do
   # post("/insert_facility", { :controller => "facilities", :action => "create" })
           
   # READ
-  # get("/facilities", { :controller => "facilities", :action => "index" })
+  get("/facilities", { :controller => "facilities", :action => "index" })
   
   get("/facilities/:path_id", { :controller => "facilities", :action => "show" })
   
@@ -135,6 +135,7 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_facility/:path_id", { :controller => "facilities", :action => "destroy" })
+  
 
   #------------------------------
 

@@ -14,6 +14,10 @@ gem 'sprockets', '< 4'
 gem 'sassc-rails'
 gem 'faker'
 
+# Added for filtering
+gem 'ransack'
+
+
 group :development do
   gem 'htmlbeautifier'
   gem 'listen', '~> 3.2'
@@ -29,7 +33,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'grade_runner', github: 'firstdraft/grade_runner'
   gem 'pry-rails'
-  gem 'pg'
+  gem 'sqlite3', '~> 1.4.1'
   gem 'table_print'
   gem 'web_git', github: 'firstdraft/web_git'
 end

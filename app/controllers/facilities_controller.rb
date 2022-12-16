@@ -1,8 +1,10 @@
 class FacilitiesController < ApplicationController
   def index
-    matching_facilities = Facility.all
- 
-    @list_of_facilities = matching_facilities.order({ :created_at => :desc })
+    @q = Facility.ransack(params[:q])
+    @list_of_facilities = @q.result
+   
+    # matching_facilities = Facility.all
+    # @list_of_facilities = matching_facilities.order({ :created_at => :desc })
 
     render({ :template => "facilities/index.html.erb" })
   end
