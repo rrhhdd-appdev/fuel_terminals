@@ -132,6 +132,15 @@ def quickupdate
   the_facility.operator = params.fetch("query_operator")
   the_facility.capacity = params.fetch("query_capacity")
 
+  the_facility.truck_in = params.fetch("query_truck_in")
+  the_facility.truck_out = params.fetch("query_truck_out")
+  the_facility.pipe_in = params.fetch("query_pipe_in")
+  the_facility.pipe_out = params.fetch("query_pipe_out")
+  the_facility.marine_in = params.fetch("query_marine_in")
+  the_facility.marine_out = params.fetch("query_marine_out")
+  the_facility.rail_in = params.fetch("query_rail_in")
+  the_facility.rail_out = params.fetch("query_rail_out")
+
 
   if the_facility.valid?
     the_facility.save

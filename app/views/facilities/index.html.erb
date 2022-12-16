@@ -7,15 +7,24 @@
 </div>
 
 
-
+<br>
 <%= search_form_for @q do |f| %>
   <p>Narrow results:</p>
 
   <div>
-    <%= f.label :name_cont, "Title containing" %>
-    <%= f.text_field :name_cont, :placeholder => "Enter a few characters" %>
+    <%= f.label :name_cont, "Name:" %>
+    <%= f.text_field :name_cont, :placeholder => "Enter Facility Name" %>
   </div>
 
+  <div>
+    <%= f.label :city_cont, "City" %>
+    <%= f.text_field :city_cont, :placeholder => "City" %>
+  </div>
+
+    <div>
+    <%= f.label :state_cont, "State" %>
+    <%= f.text_field :state_cont, :placeholder => "State" %>
+  </div>
 
 
   <%= f.submit :class => "btn btn-primary btn-block" %>
@@ -31,18 +40,20 @@
     <table border="1">
       <tr>
         <th>ID</th>
-
         <th>Name</th>
-
         <th>City</th>
-
         <th>Website</th>
-
         <th>Owner</th>
-
         <th>Operator</th>
-
         <th>Capacity</th>
+        <th>Truck In</th>
+        <th>Truck Out</th>
+        <th>Pipe In</th>
+        <th>Pipe Out</th>
+        <th>Marine In</th>
+        <th>Marine Out</th>
+        <th>Rail In</th>
+        <th>Rail Out</th>
 
         <th></th>
       </tr>
@@ -53,12 +64,21 @@
         <tr>
           <td><%= a_facility.id %></td>
 
-          <td><input type="text" id="name_box" name="query_name" value="<%= a_facility.name %>"></td>
-          <td><input type="text" id="name_box" name="query_city" value="<%= a_facility.city %>"></td>
-          <td><input type="text" id="name_box" name="query_website" value="<%= a_facility.website %>"></td>
-          <td><input type="text" id="name_box" name="query_owner" value="<%= a_facility.owner %>"></td>
-          <td><input type="text" id="name_box" name="query_operator" value="<%= a_facility.operator %>"></td>
-          <td><input type="text" id="name_box" name="query_capacity" value="<%= a_facility.capacity %>"></td>
+          <td><input type="text" name="query_name" value="<%= a_facility.name %>"></td>
+          <td><input type="text" name="query_city" value="<%= a_facility.city %>"></td>
+          <td><input type="text" name="query_website" value="<%= a_facility.website %>"></td>
+          <td><input type="text" name="query_owner" value="<%= a_facility.owner %>"></td>
+          <td><input type="text" name="query_operator" value="<%= a_facility.operator %>"></td>
+          <td><input type="number" name="query_capacity" value="<%= a_facility.capacity %>"></td>
+          
+          <td><input type="text" name="query_truck_in" value="<%= a_facility.truck_in %>"></td>
+          <td><input type="text" name="query_truck_out" value="<%= a_facility.truck_out %>"></td>
+          <td><input type="text" name="query_pipe_in" value="<%= a_facility.pipe_in %>"></td>
+          <td><input type="text" name="query_pipe_out" value="<%= a_facility.pipe_out %>"></td>
+          <td><input type="text" name="query_marine_in" value="<%= a_facility.marine_in %>"></td>
+          <td><input type="text" name="query_marine_out" value="<%= a_facility.marine_out %>"></td>
+          <td><input type="text" name="query_rail_in" value="<%= a_facility.rail_in %>"></td>
+          <td><input type="text" name="query_rail_out" value="<%= a_facility.rail_out %>"></td>
           
           <td><button id="updating_the_facility">Update Terminal</button></td>
 
