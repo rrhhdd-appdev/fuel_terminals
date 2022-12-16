@@ -118,4 +118,27 @@ class FacilitiesController < ApplicationController
 
     redirect_to("/facilities", { :notice => "Facility deleted successfully."} )
   end
+
+
+
+def quickupdate
+  the_id = params.fetch("path_id")
+  the_facility = Facility.where({ :id => the_id }).at(0)
+
+  the_facility.name = params.fetch("query_name")
+  the_facility.city = params.fetch("query_city")
+  the_facility.website = params.fetch("query_website")
+  the_facility.owner = params.fetch("query_owner")
+  the_facility.operator = params.fetch("query_operator")
+  the_facility.capacity = params.fetch("query_capacity")
+
+
+  if the_facility.valid?
+    the_facility.save
+    redirect_to("/facilities/#{the_facility.id}", { :notice => "Facility updated successfully."} )
+  else
+    redirect_to("/facilities/#{the_facility.id}", { :alert => the_facility.errors.full_messages.to_sentence })
+  end
+
+end
 end

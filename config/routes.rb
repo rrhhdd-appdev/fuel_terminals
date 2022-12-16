@@ -132,6 +132,10 @@ Rails.application.routes.draw do
   # UPDATE
   
   post("/modify_facility/:path_id", { :controller => "facilities", :action => "update" })
+
+  # Quick UPDATE (from facility index page)
+  
+  post("/quick_modify_facility/:path_id", { :controller => "facilities", :action => "quickupdate" })
   
   # DELETE
   get("/delete_facility/:path_id", { :controller => "facilities", :action => "destroy" })

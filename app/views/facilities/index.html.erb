@@ -30,76 +30,42 @@
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
+        <th>ID</th>
 
-        <th>
-          Name
-        </th>
+        <th>Name</th>
 
-        <th>
-          City
-        </th>
+        <th>City</th>
 
-        <th>
-          Website
-        </th>
+        <th>Website</th>
 
-        <th>
-          Owner
-        </th>
+        <th>Owner</th>
 
-        <th>
-          Operator
-        </th>
+        <th>Operator</th>
 
-        <th>
-          Capacity
-        </th>
+        <th>Capacity</th>
 
-        <th>
-        </th>
+        <th></th>
       </tr>
 
 
       <% @list_of_facilities.each do |a_facility| %>
-      <tr>
-        <td>
-          <%= a_facility.id %>
-        </td>
+        <form id="updating_the_facility" action="/quick_modify_facility/<%= a_facility.id %>"  method="post">
+        <tr>
+          <td><%= a_facility.id %></td>
 
-        <td>
-          <%= a_facility.name %>
-        </td>
+          <td><input type="text" id="name_box" name="query_name" value="<%= a_facility.name %>"></td>
+          <td><input type="text" id="name_box" name="query_city" value="<%= a_facility.city %>"></td>
+          <td><input type="text" id="name_box" name="query_website" value="<%= a_facility.website %>"></td>
+          <td><input type="text" id="name_box" name="query_owner" value="<%= a_facility.owner %>"></td>
+          <td><input type="text" id="name_box" name="query_operator" value="<%= a_facility.operator %>"></td>
+          <td><input type="text" id="name_box" name="query_capacity" value="<%= a_facility.capacity %>"></td>
+          
+          <td><button id="updating_the_facility">Update Terminal</button></td>
 
-        <td>
-          <%= a_facility.city %>
-        </td>
+          </form>
 
-        <td>
-          <%= a_facility.website %>
-        </td>
-
-        <td>
-          <%= a_facility.owner %>
-        </td>
-
-        <td>
-          <%= a_facility.operator %>
-        </td>
-
-        <td>
-          <%= a_facility.capacity %>
-        </td>
-
-
-        <td>
-          <a href="/facilities/<%= a_facility.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+ 
+        </tr>
       <% end %>
     </table>
   </div>
