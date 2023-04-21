@@ -3,13 +3,17 @@ Rails.application.routes.draw do
   # Homepage
   get("/", { :controller => "application", :action => "homepage" })
 
-
   # Route for map view
 
   get("/map", { :controller => "maps", :action => "index" })
-  
+
+  # Route for map view (test v.2)
+
+  get("/map2", { :controller => "maps2", :action => "index" })
+  get "/map2/search", to: "maps2#search"
+
   # Route for Markets views
-  
+
   get("/markets", { :controller => "markets", :action => "index" })
   # get("/markets/:path_id", { :controller => "markets", :action => "show" })
   # post("/search_market", { :controller => "markets", :action => "search" })
@@ -19,15 +23,15 @@ Rails.application.routes.draw do
   # Routes for the User account:
 
   # SIGN UP FORM
-  get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
+  get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })
   # CREATE RECORD
-  post("/insert_user", { :controller => "user_authentication", :action => "create"  })
-      
-  # EDIT PROFILE FORM        
-  get("/edit_user_profile", { :controller => "user_authentication", :action => "edit_profile_form" })       
+  post("/insert_user", { :controller => "user_authentication", :action => "create" })
+
+  # EDIT PROFILE FORM
+  get("/edit_user_profile", { :controller => "user_authentication", :action => "edit_profile_form" })
   # UPDATE RECORD
   post("/modify_user", { :controller => "user_authentication", :action => "update" })
-  
+
   # DELETE RECORD
   get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
 
@@ -37,26 +41,26 @@ Rails.application.routes.draw do
   get("/user_sign_in", { :controller => "user_authentication", :action => "sign_in_form" })
   # AUTHENTICATE AND STORE COOKIE
   post("/user_verify_credentials", { :controller => "user_authentication", :action => "create_cookie" })
-  
-  # SIGN OUT        
+
+  # SIGN OUT
   get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
-             
+
   #------------------------------
 
   # Routes for the Tank resource:
 
   # CREATE
   post("/insert_tank", { :controller => "tanks", :action => "create" })
-          
+
   # READ
   # get("/tanks", { :controller => "tanks", :action => "index" })
-  
+
   # get("/tanks/:path_id", { :controller => "tanks", :action => "show" })
-  
+
   # UPDATE
-  
+
   post("/modify_tank/:path_id", { :controller => "tanks", :action => "update" })
-  
+
   # DELETE
   get("/delete_tank/:path_id", { :controller => "tanks", :action => "destroy" })
 
@@ -66,16 +70,16 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_fuel", { :controller => "fuels", :action => "create" })
-          
+
   # READ
   get("/fuels", { :controller => "fuels", :action => "index" })
-  
+
   # get("/fuels/:path_id", { :controller => "fuels", :action => "show" })
-  
+
   # UPDATE
-  
+
   post("/modify_fuel/:path_id", { :controller => "fuels", :action => "update" })
-  
+
   # DELETE
   get("/delete_fuel/:path_id", { :controller => "fuels", :action => "destroy" })
 
@@ -85,16 +89,16 @@ Rails.application.routes.draw do
 
   # CREATE
   # post("/insert_company", { :controller => "companies", :action => "create" })
-          
+
   # READ
   # get("/companies", { :controller => "companies", :action => "index" })
-  
+
   # get("/companies/:path_id", { :controller => "companies", :action => "show" })
-  
+
   # UPDATE
-  
+
   # post("/modify_company/:path_id", { :controller => "companies", :action => "update" })
-  
+
   # DELETE
   # get("/delete_company/:path_id", { :controller => "companies", :action => "destroy" })
 
@@ -104,16 +108,16 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_terminal_note", { :controller => "terminal_notes", :action => "create" })
-          
+
   # READ
   # get("/terminal_notes", { :controller => "terminal_notes", :action => "index" })
-  
+
   # get("/terminal_notes/:path_id", { :controller => "terminal_notes", :action => "show" })
-  
+
   # UPDATE
-  
+
   post("/modify_terminal_note/:path_id", { :controller => "terminal_notes", :action => "update" })
-  
+
   # DELETE
   get("/delete_terminal_note/:path_id", { :controller => "terminal_notes", :action => "destroy" })
 
@@ -123,23 +127,22 @@ Rails.application.routes.draw do
 
   # CREATE
   # post("/insert_facility", { :controller => "facilities", :action => "create" })
-          
+
   # READ
   get("/facilities", { :controller => "facilities", :action => "index" })
-  
+
   get("/facilities/:path_id", { :controller => "facilities", :action => "show" })
-  
+
   # UPDATE
-  
+
   post("/modify_facility/:path_id", { :controller => "facilities", :action => "update" })
 
   # Quick UPDATE (from facility index page)
-  
+
   post("/quick_modify_facility/:path_id", { :controller => "facilities", :action => "quickupdate" })
-  
+
   # DELETE
   get("/delete_facility/:path_id", { :controller => "facilities", :action => "destroy" })
-  
 
   #------------------------------
 

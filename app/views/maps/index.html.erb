@@ -34,11 +34,14 @@
   </div>
 </form>
 
-<!-- Map showing all temrinals -->
+<!-- Map showing all terminals -->
 
 <div>
   <div class="map" id="map" style='height: 700px;'></div>
 </div>
+
+<button id="displayTerminalsBtn">Display terminals in this area</button>
+    <div id="terminalList"></div>
 
 <script>
   function initMap() {
@@ -49,6 +52,10 @@
 
     // An empty bounds variable for seeting automatic zoom level (bounds of map)
     var bounds = new google.maps.LatLngBounds();
+
+    // Store all markers for facilities
+    var markers = [];
+
 
     <% Facility.all.each do |place| %>
 
@@ -72,6 +79,10 @@
 
       // Add this marker in map bounds
       bounds.extend(new google.maps.LatLng(<%= place.latitude %>, <%= place.longitude %>));
+
+
+      // Add this marker to the markers array
+      markers.push(marker_<%= place.id %>);
       
     <% end %>
 
@@ -89,7 +100,43 @@
                 document.getElementById("swlat").innerHTML = sw_lat;
               var sw_lng = sw.lng();
                 document.getElementById("swlng").innerHTML = sw_lng;
+
+  
      });
+      
+      // Add event listener for search area button click
+    document.getElementById("search-area-btn").addEventListener("click", function() {
+      var currentBounds = map.getBounds();
+      var facilitiesInArea = [];
+
+      // Iterate through all markers to check if they are within the bounds
+      for (var i = 0; i < markers.length; i++) {
+        var markerPosition = markers[i].getPosition();
+
+        if (currentBounds.contains(markerPosition)) {
+          facilitiesInArea.push(markers[i].getTitle());
+        }
+      }
+
+      // Display facilities in area as a list
+      var facilitiesList = document.getElementById("facilities-in-area");
+      facilitiesList.innerHTML = "";
+
+      if (facilitiesInArea.length > 0) {
+        for (var i = 0; i < facilitiesInArea.length; i++) {
+          var facilityItem = document.createElement("li");
+          var facilityLink = document.createElement("a");
+          facilityLink.href = "/facilities/" + facilitiesInArea[i].toLowerCase().replace(/\s+/g, '-');
+          facilityLink.textContent = facilitiesInArea[i];
+          facilityItem.appendChild(facilityLink);
+          facilitiesList.appendChild(facilityItem);
+        }
+      } else {
+        var noFacilities = document.createElement("li");
+        noFacilities.textContent = "No facilities found in this area.";
+        facilitiesList.appendChild(noFacilities);
+      }
+    });
   };
 
 </script>
@@ -104,6 +151,7 @@
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV.fetch("GMAPS_KEY")%>&callback=initMap"async defer></script>
+
 
 
 
