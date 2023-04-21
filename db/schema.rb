@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_08_002523) do
+ActiveRecord::Schema.define(version: 2022_12_05_162423) do
 
   create_table "companies", force: :cascade do |t|
     t.string "company_name"
@@ -24,7 +24,10 @@ ActiveRecord::Schema.define(version: 2022_12_08_002523) do
     t.string "address"
     t.string "phone"
     t.string "term_type"
+    t.string "term_id"
+    t.string "status"
     t.string "county"
+    t.integer "countyfips"
     t.float "latitude"
     t.float "longitude"
     t.string "source"
@@ -33,39 +36,35 @@ ActiveRecord::Schema.define(version: 2022_12_08_002523) do
     t.string "operator"
     t.string "commodity"
     t.integer "capacity"
+    t.string "truck_in"
+    t.string "truck_out"
+    t.string "pipe_in"
+    t.string "pipe_out"
+    t.string "marine_in"
+    t.string "marine_out"
+    t.string "rail_in"
+    t.string "rail_out"
     t.string "parsel"
     t.string "city"
     t.string "state"
     t.string "zip"
     t.string "zip4"
-    t.integer "tanks_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "countyfips"
-    t.string "status"
-    t.string "term_id"
-    t.string "truck_in"
-    t.string "truck_out"
-    t.string "marine_in"
-    t.string "marine_out"
-    t.string "rail_in"
-    t.string "rail_out"
-    t.string "pipe_in"
-    t.string "pipe_out"
-  end
-
-  create_table "fuels", force: :cascade do |t|
-    t.string "name"
-    t.string "category"
-    t.integer "tanks_count"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "tanks", force: :cascade do |t|
-    t.integer "terminal_id"
-    t.integer "fuel_id"
-    t.integer "product_capacity"
+    t.integer "naics_code"
+    t.string "naics_desc"
+    t.string "exstars_i"
+    t.boolean "asphalt"
+    t.boolean "chemicals"
+    t.boolean "propane"
+    t.boolean "butane"
+    t.boolean "refined"
+    t.boolean "ethanol"
+    t.boolean "biodiesel"
+    t.boolean "crude_oil"
+    t.boolean "jetfuel"
+    t.boolean "gasoline"
+    t.boolean "distillate"
+    t.boolean "avgas"
+    t.boolean "renewable_diesel"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -73,7 +72,7 @@ ActiveRecord::Schema.define(version: 2022_12_08_002523) do
   create_table "terminal_notes", force: :cascade do |t|
     t.text "note"
     t.integer "user_id"
-    t.integer "terminal_id"
+    t.integer "term_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
