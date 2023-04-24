@@ -21,7 +21,7 @@
     <%= f.text_field :city_cont, :placeholder => "City" %>
   </div>
 
-    <div>
+  <div>
     <%= f.label :state_cont, "State" %>
     <%= f.text_field :state_cont, :placeholder => "State" %>
   </div>
@@ -54,6 +54,19 @@
         <th>Marine Out</th>
         <th>Rail In</th>
         <th>Rail Out</th>
+        <th>Asphalt</th>
+        <th>Chemicals</th>
+        <th>Propane</th>
+        <th>Ethanol</th>
+        <th>Refined</th>
+        <th>Biodiesel</th>
+        <th>Crude Oil</th>
+        <th>Jetfuel</th>
+        <th>Gasoline</th>
+        <th>Distillate</th>
+        <th>Avgas</th>
+        <th>Butane</th>
+        <th>Renewable Diesel</th>
 
         <th></th>
       </tr>
@@ -79,6 +92,20 @@
           <td><input type="text" name="query_marine_out" value="<%= a_facility.marine_out %>"></td>
           <td><input type="text" name="query_rail_in" value="<%= a_facility.rail_in %>"></td>
           <td><input type="text" name="query_rail_out" value="<%= a_facility.rail_out %>"></td>
+
+          <td><input type="checkbox" name="query_asphalt" <%= "checked" if a_facility.asphalt %>></td>
+          <td><input type="checkbox" name="query_chemicals" <%= "checked" if a_facility.chemicals %>></td>
+          <td><input type="checkbox" name="query_propane" <%= "checked" if a_facility.propane %>></td>
+          <td><input type="checkbox" name="query_ethanol" <%= "checked" if a_facility.ethanol %>></td>
+          <td><input type="checkbox" name="query_refined" <%= "checked" if a_facility.refined %>></td>
+          <td><input type="checkbox" name="query_biodiesel" <%= "checked" if a_facility.biodiesel %>></td>
+          <td><input type="checkbox" name="query_crude_oil" <%= "checked" if a_facility.crude_oil %>></td>
+          <td><input type="checkbox" name="query_jetfuel" <%= "checked" if a_facility.jetfuel %>></td>
+          <td><input type="checkbox" name="query_gasoline" <%= "checked" if a_facility.gasoline %>></td>
+          <td><input type="checkbox" name="query_distillate" <%= "checked" if a_facility.distillate %>></td>
+          <td><input type="checkbox" name="query_avgas" <%= "checked" if a_facility.avgas %>></td>
+          <td><input type="checkbox" name="query_butane" <%= "checked" if a_facility.butane %>></td>
+          <td><input type="checkbox" name="query_renewable_diesel" <%= "checked" if a_facility.renewable_diesel %>></td>
           
           <td><button id="updating_the_facility">Update Terminal</button></td>
 

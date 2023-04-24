@@ -11,14 +11,28 @@ class Maps2Controller < ApplicationController
     facilities = Facility.all
     facilities = facilities.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
     facilities = facilities.where(state: params[:state]) if params[:state].present?
+    facilities = facilities.where(city: params[:city].upcase) if params[:city].present?
+    facilities = facilities.where(zip_code: params[:zip_code]) if params[:zip_code].present?
+
+    if params[:products].present?
+      params[:products].each do |product|
+        facilities = facilities.where("#{product} = ?", true)
+      end
+    end
+
     markers = facilities.map do |f|
       {
         id: f.id,
         latitude: f.latitude,
         longitude: f.longitude,
         name: f.name,
+        address: f.address,
+        capacity: f.capacity,
+        city: f.city,
+        state: f.state,
       }
     end
-    render json: { markers: markers }
+    total_capacity = facilities.sum(:capacity)
+    render json: { markers: markers, count: facilities.count, total_capacity: total_capacity }
   end
 end
