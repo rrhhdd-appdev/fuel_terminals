@@ -38,43 +38,54 @@
       <%= submit_tag "Search", class: "btn btn-primary" %>
     </form>
   </div>
-  <div class="col-md-9">
-    <div id="map" style="height: 500px;"></div>
-  </div>
-</div>
 
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-12">
+          <div id="map" style="height: 500px;"></div>
+      </div>
+    </div>
 <br>
 
-<div class="col-md-12" id="stats-cards" style="display: none;">
-  <div class="row">
-    <div class="col-md-6">
-        <div class="card text-center">
-          <div class="card-header">
-            <strong>Number of Terminals</strong>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="stats-cards" style="display: none;">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="card text-center">
+                  <div class="card-header">
+                    <strong>Number of Terminals</strong>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text" id="facility-count"></p>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header">
+                  <strong>Total Storage Capacity (bbls)</strong>
+                </div>
+                <div class="card-body">
+                  <p class="card-text" id="total-capacity"></p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <p class="card-text" id="facility-count"></p>
-          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-6">
-     <div class="card text-center">
-        <div class="card-header">
-          <strong>Total Storage Capacity (bbls)</strong>
-        </div>
-        <div class="card-body">
-          <p class="card-text" id="total-capacity"></p>
-        </div>
+
+    <div class="col-md-12 mt-3">
+      <div class="row" id="facility-cards">
+        <!-- Facility cards will be inserted here -->
       </div>
     </div>
+
   </div>
 </div>
 
-<div class="col-md-12 mt-3">
-  <div class="row" id="facility-cards">
-    <!-- Facility cards will be inserted here -->
-  </div>
-</div>
+
 
 <script>
   function initMap() {
@@ -173,7 +184,7 @@
 
       response.markers.forEach(function(markerData) {
         var formattedCapacity = formatNumber(markerData.capacity);
-        var card = $('<div class="col-md-4 mb-3">' +
+        var card = $('<div class="col-md-4 col-sm-6 col-12 mb-3">' +
                       '<div class="card text-center">' +
                         '<div class="card-header">' +
                           '<strong>' + markerData.name + '</strong>' +
@@ -194,7 +205,6 @@
   });
 }
 
-
   $(document).ready(function() {
     initMap();
     $('#search-form').on('submit', function(e) {
@@ -206,3 +216,11 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV.fetch("GMAPS_KEY")%>&callback=initMap" async defer></script>
+
+<style>
+  .col-auto{
+    padding-left: 10px;
+    padding-bottom: 15px;
+  }
+  
+</style>
