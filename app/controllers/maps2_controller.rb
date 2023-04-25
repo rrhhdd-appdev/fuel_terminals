@@ -1,7 +1,7 @@
 class Maps2Controller < ApplicationController
   def index
     @facilities = Facility.all
-    @markers = @facilities.map { |facility| { latitude: facility.latitude, longitude: facility.longitude, name: facility.name } }
+    @markers = @facilities.map { |facility| { id: facility.id, latitude: facility.latitude, longitude: facility.longitude, name: facility.name } }
     @states = Facility.pluck(:state).uniq.sort
 
     render({ :template => "maps2/index.html.erb" })
