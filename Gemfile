@@ -14,6 +14,10 @@ gem 'sprockets', '< 4'
 gem 'sassc-rails'
 gem 'faker'
 
+# Added for filtering
+gem 'ransack'
+
+
 group :development do
   gem 'htmlbeautifier'
   gem 'listen', '~> 3.2'

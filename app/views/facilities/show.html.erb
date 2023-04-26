@@ -1,10 +1,6 @@
-<script>
-    document.write('<a href="' + document.referrer + '">Go Back</a>');
-</script>
+<!DOCTYPE html>
 
-
-
-
+<div class="container py-5">
 <div>
   <h1><%= @the_facility.name.titleize %> Terminal Details</h1>
 </div>
@@ -54,7 +50,7 @@
           Capacity (bbls)
         </div>
         <div class="card-body">
-          <p class="card-text"><%= @the_facility.capacity %></p>
+          <p class="card-text"><%= number_with_delimiter(@the_facility.capacity, :delimiter => ',') %></p>
         </div>
       </div>
     </div>
@@ -156,13 +152,86 @@
   <h4>Products</h4>
 </div>
 
-<div class="col-md-3">
-<% @the_facility.fuels.each do |product|%>
-  <ul class="list-group">
-    <li class="list-group-item"><%=product.name.titleize %></li>
-  </ul>
-<% end %>
-</div>
+  <div class="col-md-3">
+    <% if @the_facility.asphalt %>
+      <ul class="list-group">
+        <li class="list-group-item">Asphalt</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.chemicals %>
+      <ul class="list-group">
+        <li class="list-group-item">Chemicals</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.propane %>
+      <ul class="list-group">
+        <li class="list-group-item">Propane</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.ethanol %>
+      <ul class="list-group">
+        <li class="list-group-item">Ethanol</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.refined %>
+      <ul class="list-group">
+        <li class="list-group-item">Refined</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.biodiesel %>
+      <ul class="list-group">
+        <li class="list-group-item">Biodiesel</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.crude_oil %>
+      <ul class="list-group">
+        <li class="list-group-item">Crude Oil</li>
+      </ul>
+    <% end %>
+  
+    <% if @the_facility.jetfuel %>
+      <ul class="list-group">
+        <li class="list-group-item">Jet Fuel</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.gasoline %>
+      <ul class="list-group">
+        <li class="list-group-item">Gasoline</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.distillate %>
+      <ul class="list-group">
+        <li class="list-group-item">Distillate</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.avgas %>
+      <ul class="list-group">
+        <li class="list-group-item">Avgas</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.butane %>
+      <ul class="list-group">
+        <li class="list-group-item">Butane</li>
+      </ul>
+    <% end %>
+
+    <% if @the_facility.renewable_diesel %>
+      <ul class="list-group">
+        <li class="list-group-item">Renewable Diesel</li>
+      </ul>
+    <% end %>
+ 
+  </div>
 
 <br>
 
@@ -176,7 +245,7 @@
       <th>Created at</th>
       <th>Delete note</th>
     </tr>
-    <% @list_of_terminal_notes.where( :terminal_id => @the_facility.id).each do |a_terminal_note| %>
+    <% @list_of_terminal_notes.where( :term_id => @the_facility.id).each do |a_terminal_note| %>
     <tr>
       <% note_maker = a_terminal_note.user_id %>
       <td><%= User.where( :id => note_maker ).at(0).first_name%></td>
@@ -200,59 +269,12 @@
 </div>
 
 
-
-
-
-
-
-
 <br>
 <h2>
   Edit Terminal
 </h2>
 <hr>
 
-
-<h4>Update products offered at this terminal</h4>
-
-<% product_names = Array.new %>
-<% Fuel.all.each do |product|%>
-  <% product_names.push(product.id) %>
-<% end %>
-
-<% terminal_products = Array.new %>
-<% @the_facility.fuels.all.each do |term_fuel|%>
-  <% terminal_products.push(term_fuel.id) %>
-<% end %>
-
-<div class="col-md-6">
-  <table class="table table-bordered">
-    <tr>
-      <th>Fuel</th>
-      <th>Add or Delete Fuel</th>
-    </tr>
-  <% product_names.each do |check|%>
-    <tr>
-      <td><%= Fuel.where({ :id => check}).at(0).name.titleize %> </td>
-      <% if terminal_products.include? check %>
-          <% tank_number = Tank.where({ :terminal_id => @the_facility.id }).where({ :fuel_id => check }).at(0).id %>
-        <td>
-          <a type="button" class="btn btn-danger" href="/delete_tank/<%=tank_number%>">Remove Product from Terminal</a>
-      </td>
-      <% else %>
-        <form id="add_tank" action="/insert_tank" method="post">
-          <input id="query_terminal_id" type="hidden" value="<%= @the_facility.id %>" name="query_terminal_id">
-          <input id="query_fuel_id" type="hidden" value="<%= check %>" name="query_fuel_id">
-          <input id="query_product_capacity" type="hidden" value=nil name="query_product_capacity">
-          <td>
-          <button id="add_tank" class="btn btn-primary">Add Product to Terminal</button>
-          </td>
-        </form>    
-      <% end %>
-    </tr>
-  <% end %>
-  </table>
-</div>
 
 
 <h4>Edit Terminal Data</h4>
@@ -404,67 +426,59 @@
    </div>
 
    <div class="the_form">
-    <input type="hidden" id="truck_in_box" name="query_truck_in" value="NO" />
-    <input type="checkbox" id="truck_in_box" name="query_truck_in" value="YES" <%="checked" if @the_facility.truck_in == "YES" %>>
     <label for="truck_in_box">
          Truck in
      </label>
+    <input type="text" id="truck_in_box" name="query_truck_in" value="<%= @the_facility.truck_in %>">
    </div>
 
    <div class="the_form">
-    <input type="hidden" id="truck_out_box" name="query_truck_out" value="NO" />
-    <input type="checkbox" id="truck_out_box" name="query_truck_out" value="YES" <%="checked" if @the_facility.truck_out == "YES" %>>
      <label for="truck_out_box">
         Truck out
     </label>
+    <input type="text" id="truck_out_box" name="query_truck_out" value="<%= @the_facility.truck_out %>">
   </div>
 
   <div class="the_form">
-    <input type="hidden" id="pipe_in_box" name="query_pipe_in" value="NO" />
-    <input type="checkbox" id="pipe_in_box" name="query_pipe_in" value="YES" <%="checked" if @the_facility.pipe_in == "YES" %>>
      <label for="pipe_in_box">
          Pipe in
     </label>
+    <input type="text" id="pipe_in_box" name="query_pipe_in" value="<%= @the_facility.pipe_in %>">
    </div>
 
    <div class="the_form">
-    <input type="hidden" id="pipe_out_box" name="query_pipe_out" value="NO" />
-    <input type="checkbox" id="pipe_out_box" name="query_pipe_out" value="YES" <%="checked" if @the_facility.pipe_out == "YES" %>>
     <label for="pipe_out_box">
         Pipe out
     </label>
+    <input type="text" id="pipe_out_box" name="query_pipe_out" value="<%= @the_facility.pipe_out %>">
   </div>
 
   <div class="the_form">
-    <input type="hidden" id="marine_in_box" name="query_marine_in" value="NO" />
-    <input type="checkbox" id="marine_in_box" name="query_marine_in" value="YES" <%="checked" if @the_facility.marine_in == "YES" %>>
     <label for="marine_in_box">
         Marine in
     </label>
+    <input type="text" id="marine_in_box" name="query_marine_in" value="<%= @the_facility.marine_in %>">
   </div>
 
   <div class="the_form">
-    <input type="hidden" id="marin_out_box" name="query_marine_out" value="NO" />
-    <input type="checkbox" id="marin_out_box" name="query_marine_out" value="YES" <%="checked" if @the_facility.marine_out == "YES" %>>
     <label for="marine_out_box">
         Marine out
      </label>
+      <input type="text" id="marin_out_box" name="query_marine_out" value="<%= @the_facility.marine_out %>">
    </div>
 
   <div class="the_form">
-    <input type="hidden" id="rail_in_box" name="query_rail_in" value="NO" />
-     <input type="checkbox" id="rail_in_box" name="query_rail_in" value="YES" <%="checked" if @the_facility.rail_in == "YES" %>>
      <label for="rail_in_box">
          Rail in
      </label>
+    <input type="text" id="rail_in_box" name="query_rail_in" value="<%= @the_facility.rail_in %>">
   </div>
 
   <div class="the_form">
-    <input type="hidden" id="rail_out_box" name="query_rail_out" value="NO" />
-    <input type="checkbox" id="rail_out_box" name="query_rail_out" value="YES" <%="checked" if @the_facility.rail_out == "YES" %>>
     <label for="rail_out_box">
         Rail out
     </label>
+    <input type="text" id="rail_out_box" name="query_rail_out" value="<%= @the_facility.rail_out %>">
   </div>
 
    <div class="the_form">
@@ -502,21 +516,124 @@
     <input type="text" id="zip4_box" name="query_zip4" value="<%= @the_facility.zip4 %>">
    </div>
 
+  <div class="the_form">
+    <label for="asphalt_checkbox">
+      Asphalt
+    </label>
+    <input type="checkbox" id="asphalt_checkbox" name="query_asphalt" <%= @the_facility.asphalt ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="chemicals_checkbox">
+      Chemicals
+    </label>
+    <input type="checkbox" id="chemicals_checkbox" name="query_chemicals" <%= @the_facility.chemicals ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="propane_checkbox">
+      Propane
+    </label>
+    <input type="checkbox" id="propane_checkbox" name="query_propane" <%= @the_facility.propane ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="ethanol_checkbox">
+      Ethanol
+    </label>
+    <input type="checkbox" id="ethanol_checkbox" name="query_ethanol" <%= @the_facility.ethanol ? 'checked' : '' %>>
+  </div>
+
+
+  <div class="the_form">
+    <label for="refined_checkbox">
+      Refined
+    </label>
+    <input type="checkbox" id="refined_checkbox" name="query_refined" <%= @the_facility.refined ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="biodiesel_checkbox">
+      Biodiesel
+    </label>
+    <input type="checkbox" id="biodiesel_checkbox" name="query_biodiesel" <%= @the_facility.biodiesel ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="crude_oil_checkbox">
+      Crude Oil
+    </label>
+    <input type="checkbox" id="crude_oil_checkbox" name="query_crude_oil" <%= @the_facility.crude_oil ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="jetfuel_checkbox">
+      Jet Fuel
+    </label>
+    <input type="checkbox" id="jetfuel_checkbox" name="query_jetfuel" <%= @the_facility.jetfuel ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="gasoline_checkbox">
+      Gasoline
+    </label>
+    <input type="checkbox" id="gasoline_checkbox" name="query_gasoline" <%= @the_facility.gasoline ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="distillate_checkbox">
+      Distillate
+    </label>
+    <input type="checkbox" id="distillate_checkbox" name="query_distillate" <%= @the_facility.distillate ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="avgas_checkbox">
+      Avgas
+    </label>
+    <input type="checkbox" id="avgas_checkbox" name="query_avgas" <%= @the_facility.avgas ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="butane_checkbox">
+      Butane
+    </label>
+    <input type="checkbox" id="butane_checkbox" name="query_butane" <%= @the_facility.butane ? 'checked' : '' %>>
+  </div>
+
+  <div class="the_form">
+    <label for="renewable_diesel_checkbox">
+      Renewable Diesel
+    </label>
+    <input type="checkbox" id="renewable_diesel_checkbox" name="query_renewable_diesel" <%= @the_facility.renewable_diesel ? 'checked' : '' %>>
+  </div>
+
+
+
+
+
    <button id="updating_the_facility">
     Update Terminal
    </button>
 </form>
 </div>
+</div>
 
-<br>
+<!--
+ <br>
 <div>
   <a href="/delete_facility/<%= @the_facility.id %>">
     Delete Terminal
   </a>
-</div>
+</div> -->
+
 
 
 <style>
+  .page-wrapper {
+    margin-left: 3rem;
+    margin-right: 3rem; 
+  }
   .col-md-4{
     margin-bottom: 20px;
   }

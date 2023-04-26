@@ -6,492 +6,113 @@
   </div>
 </div>
 
-<hr>
 
-<div>
+<br>
+<%= search_form_for @q do |f| %>
+  <p>Narrow results:</p>
+
   <div>
-    <h2>
-      Add a new facility
-    </h2>
-
-    <form action="/insert_facility" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name">
-      </div>
-
-      <div>
-        <label for="address_box">
-          Address
-        </label>
-
-        <input type="text" id="address_box" name="query_address">
-      </div>
-
-      <div>
-        <label for="phone_box">
-          Phone
-        </label>
-
-        <input type="text" id="phone_box" name="query_phone">
-      </div>
-
-      <div>
-        <label for="term_type_box">
-          Term type
-        </label>
-
-        <input type="text" id="term_type_box" name="query_term_type">
-      </div>
-
-      <div>
-        <input type="checkbox" id="status_box" name="query_status" value="1">
-
-        <label for="status_box">Status</label>
-      </div>
-
-      <div>
-        <label for="county_box">
-          County
-        </label>
-
-        <input type="text" id="county_box" name="query_county">
-      </div>
-
-      <div>
-        <label for="latitude_box">
-          Latitude
-        </label>
-
-        <input type="text" id="latitude_box" name="query_latitude">
-      </div>
-
-      <div>
-        <label for="longitude_box">
-          Longitude
-        </label>
-
-        <input type="text" id="longitude_box" name="query_longitude">
-      </div>
-
-      <div>
-        <label for="source_box">
-          Source
-        </label>
-
-        <input type="text" id="source_box" name="query_source">
-      </div>
-
-      <div>
-        <label for="website_box">
-          Website
-        </label>
-
-        <input type="text" id="website_box" name="query_website">
-      </div>
-
-      <div>
-        <label for="owner_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_box" name="query_owner">
-      </div>
-
-      <div>
-        <label for="operator_box">
-          Operator
-        </label>
-
-        <input type="text" id="operator_box" name="query_operator">
-      </div>
-
-      <div>
-        <label for="commodity_box">
-          Commodity
-        </label>
-
-        <input type="text" id="commodity_box" name="query_commodity">
-      </div>
-
-      <div>
-        <label for="capacity_box">
-          Capacity
-        </label>
-
-        <input type="text" id="capacity_box" name="query_capacity">
-      </div>
-
-      <div>
-        <input type="checkbox" id="truck_in_box" name="query_truck_in" value="1">
-
-        <label for="truck_in_box">Truck in</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="truck_out_box" name="query_truck_out" value="1">
-
-        <label for="truck_out_box">Truck out</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="pipe_in_box" name="query_pipe_in" value="1">
-
-        <label for="pipe_in_box">Pipe in</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="pipe_out_box" name="query_pipe_out" value="1">
-
-        <label for="pipe_out_box">Pipe out</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="marine_in_box" name="query_marine_in" value="1">
-
-        <label for="marine_in_box">Marine in</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="marine_out_box" name="query_marine_out" value="1">
-
-        <label for="marine_out_box">Marine out</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="rail_in_box" name="query_rail_in" value="1">
-
-        <label for="rail_in_box">Rail in</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="rail_out_box" name="query_rail_out" value="1">
-
-        <label for="rail_out_box">Rail out</label>
-      </div>
-
-      <div>
-        <label for="parsel_box">
-          Parsel
-        </label>
-
-        <input type="text" id="parsel_box" name="query_parsel">
-      </div>
-
-      <div>
-        <label for="city_box">
-          City
-        </label>
-
-        <input type="text" id="city_box" name="query_city">
-      </div>
-
-      <div>
-        <label for="state_box">
-          State
-        </label>
-
-        <input type="text" id="state_box" name="query_state">
-      </div>
-
-      <div>
-        <label for="zip_box">
-          Zip
-        </label>
-
-        <input type="text" id="zip_box" name="query_zip">
-      </div>
-
-      <div>
-        <label for="zip4_box">
-          Zip4
-        </label>
-
-        <input type="text" id="zip4_box" name="query_zip4">
-      </div>
-
-      <div>
-        <label for="tanks_count_box">
-          Tanks count
-        </label>
-
-        <input type="text" id="tanks_count_box" name="query_tanks_count">
-      </div>
-
-      <button>
-        Create facility
-      </button>
-    </form>
+    <%= f.label :name_cont, "Name:" %>
+    <%= f.text_field :name_cont, :placeholder => "Enter Facility Name" %>
   </div>
-</div>
+
+  <div>
+    <%= f.label :city_cont, "City" %>
+    <%= f.text_field :city_cont, :placeholder => "City" %>
+  </div>
+
+  <div>
+    <%= f.label :state_cont, "State" %>
+    <%= f.text_field :state_cont, :placeholder => "State" %>
+  </div>
+
+
+  <%= f.submit :class => "btn btn-primary btn-block" %>
+  
+  <a href="/facilities">Clear filters</a>
+<% end %>
+
+
 
 <hr>
 <div>
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Website</th>
+        <th>Owner</th>
+        <th>Operator</th>
+        <th>Capacity</th>
+        <th>Truck In</th>
+        <th>Truck Out</th>
+        <th>Pipe In</th>
+        <th>Pipe Out</th>
+        <th>Marine In</th>
+        <th>Marine Out</th>
+        <th>Rail In</th>
+        <th>Rail Out</th>
+        <th>Asphalt</th>
+        <th>Chemicals</th>
+        <th>Propane</th>
+        <th>Ethanol</th>
+        <th>Refined</th>
+        <th>Biodiesel</th>
+        <th>Crude Oil</th>
+        <th>Jetfuel</th>
+        <th>Gasoline</th>
+        <th>Distillate</th>
+        <th>Avgas</th>
+        <th>Butane</th>
+        <th>Renewable Diesel</th>
 
-        <th>
-          Name
-        </th>
-
-        <th>
-          Address
-        </th>
-
-        <th>
-          Phone
-        </th>
-
-        <th>
-          Term type
-        </th>
-
-        <th>
-          Status
-        </th>
-
-        <th>
-          County
-        </th>
-
-        <th>
-          Latitude
-        </th>
-
-        <th>
-          Longitude
-        </th>
-
-        <th>
-          Source
-        </th>
-
-        <th>
-          Website
-        </th>
-
-        <th>
-          Owner
-        </th>
-
-        <th>
-          Operator
-        </th>
-
-        <th>
-          Commodity
-        </th>
-
-        <th>
-          Capacity
-        </th>
-
-        <th>
-          Truck in
-        </th>
-
-        <th>
-          Truck out
-        </th>
-
-        <th>
-          Pipe in
-        </th>
-
-        <th>
-          Pipe out
-        </th>
-
-        <th>
-          Marine in
-        </th>
-
-        <th>
-          Marine out
-        </th>
-
-        <th>
-          Rail in
-        </th>
-
-        <th>
-          Rail out
-        </th>
-
-        <th>
-          Parsel
-        </th>
-
-        <th>
-          City
-        </th>
-
-        <th>
-          State
-        </th>
-
-        <th>
-          Zip
-        </th>
-
-        <th>
-          Zip4
-        </th>
-
-        <th>
-          Tanks count
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
+        <th></th>
       </tr>
+
 
       <% @list_of_facilities.each do |a_facility| %>
-      <tr>
-        <td>
-          <%= a_facility.id %>
-        </td>
+        <form id="updating_the_facility" action="/quick_modify_facility/<%= a_facility.id %>"  method="post">
+        <tr>
+          <td><%= a_facility.id %></td>
 
-        <td>
-          <%= a_facility.name %>
-        </td>
+          <td><input type="text" name="query_name" value="<%= a_facility.name %>"></td>
+          <td><input type="text" name="query_city" value="<%= a_facility.city %>"></td>
+          <td><input type="text" name="query_website" value="<%= a_facility.website %>"></td>
+          <td><input type="text" name="query_owner" value="<%= a_facility.owner %>"></td>
+          <td><input type="text" name="query_operator" value="<%= a_facility.operator %>"></td>
+          <td><input type="number" name="query_capacity" value="<%= a_facility.capacity %>"></td>
+          
+          <td><input type="text" name="query_truck_in" value="<%= a_facility.truck_in %>"></td>
+          <td><input type="text" name="query_truck_out" value="<%= a_facility.truck_out %>"></td>
+          <td><input type="text" name="query_pipe_in" value="<%= a_facility.pipe_in %>"></td>
+          <td><input type="text" name="query_pipe_out" value="<%= a_facility.pipe_out %>"></td>
+          <td><input type="text" name="query_marine_in" value="<%= a_facility.marine_in %>"></td>
+          <td><input type="text" name="query_marine_out" value="<%= a_facility.marine_out %>"></td>
+          <td><input type="text" name="query_rail_in" value="<%= a_facility.rail_in %>"></td>
+          <td><input type="text" name="query_rail_out" value="<%= a_facility.rail_out %>"></td>
 
-        <td>
-          <%= a_facility.address %>
-        </td>
+          <td><input type="checkbox" name="query_asphalt" <%= "checked" if a_facility.asphalt %>></td>
+          <td><input type="checkbox" name="query_chemicals" <%= "checked" if a_facility.chemicals %>></td>
+          <td><input type="checkbox" name="query_propane" <%= "checked" if a_facility.propane %>></td>
+          <td><input type="checkbox" name="query_ethanol" <%= "checked" if a_facility.ethanol %>></td>
+          <td><input type="checkbox" name="query_refined" <%= "checked" if a_facility.refined %>></td>
+          <td><input type="checkbox" name="query_biodiesel" <%= "checked" if a_facility.biodiesel %>></td>
+          <td><input type="checkbox" name="query_crude_oil" <%= "checked" if a_facility.crude_oil %>></td>
+          <td><input type="checkbox" name="query_jetfuel" <%= "checked" if a_facility.jetfuel %>></td>
+          <td><input type="checkbox" name="query_gasoline" <%= "checked" if a_facility.gasoline %>></td>
+          <td><input type="checkbox" name="query_distillate" <%= "checked" if a_facility.distillate %>></td>
+          <td><input type="checkbox" name="query_avgas" <%= "checked" if a_facility.avgas %>></td>
+          <td><input type="checkbox" name="query_butane" <%= "checked" if a_facility.butane %>></td>
+          <td><input type="checkbox" name="query_renewable_diesel" <%= "checked" if a_facility.renewable_diesel %>></td>
+          
+          <td><button id="updating_the_facility">Update Terminal</button></td>
 
-        <td>
-          <%= a_facility.phone %>
-        </td>
+          </form>
 
-        <td>
-          <%= a_facility.term_type %>
-        </td>
-
-        <td>
-          <%= a_facility.status %>
-        </td>
-
-        <td>
-          <%= a_facility.county %>
-        </td>
-
-        <td>
-          <%= a_facility.latitude %>
-        </td>
-
-        <td>
-          <%= a_facility.longitude %>
-        </td>
-
-        <td>
-          <%= a_facility.source %>
-        </td>
-
-        <td>
-          <%= a_facility.website %>
-        </td>
-
-        <td>
-          <%= a_facility.owner %>
-        </td>
-
-        <td>
-          <%= a_facility.operator %>
-        </td>
-
-        <td>
-          <%= a_facility.commodity %>
-        </td>
-
-        <td>
-          <%= a_facility.capacity %>
-        </td>
-
-        <td>
-          <%= a_facility.truck_in %>
-        </td>
-
-        <td>
-          <%= a_facility.truck_out %>
-        </td>
-
-        <td>
-          <%= a_facility.pipe_in %>
-        </td>
-
-        <td>
-          <%= a_facility.pipe_out %>
-        </td>
-
-        <td>
-          <%= a_facility.marine_in %>
-        </td>
-
-        <td>
-          <%= a_facility.marine_out %>
-        </td>
-
-        <td>
-          <%= a_facility.rail_in %>
-        </td>
-
-        <td>
-          <%= a_facility.rail_out %>
-        </td>
-
-        <td>
-          <%= a_facility.parsel %>
-        </td>
-
-        <td>
-          <%= a_facility.city %>
-        </td>
-
-        <td>
-          <%= a_facility.state %>
-        </td>
-
-        <td>
-          <%= a_facility.zip %>
-        </td>
-
-        <td>
-          <%= a_facility.zip4 %>
-        </td>
-
-        <td>
-          <%= a_facility.tanks_count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_facility.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_facility.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/facilities/<%= a_facility.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+ 
+        </tr>
       <% end %>
     </table>
   </div>
