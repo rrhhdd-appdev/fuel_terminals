@@ -12,7 +12,7 @@ class Maps2Controller < ApplicationController
     facilities = facilities.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
     facilities = facilities.where(state: params[:state]) if params[:state].present?
     facilities = facilities.where(city: params[:city].upcase) if params[:city].present?
-    facilities = facilities.where(zip_code: params[:zip_code]) if params[:zip_code].present?
+    facilities = facilities.where(zip: params[:zip]) if params[:zip].present?
 
     if params[:products].present?
       params[:products].each do |product|

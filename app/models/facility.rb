@@ -52,6 +52,6 @@
 #  term_id          :string
 #
 class Facility < ApplicationRecord
-  has_many(:terminal_notes, { :class_name => "TerminalNote", :foreign_key => "terminal_id", :dependent => :destroy })
+  has_many(:terminal_notes, { :class_name => "TerminalNote", :foreign_key => "term_id", :dependent => :destroy })
   validates(:term_id, { :uniqueness => true })
 end

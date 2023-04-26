@@ -21,8 +21,8 @@
         <%= text_field_tag :city, params[:city], class: "form-control", placeholder: "Enter city" %>
       </div>
       <div class="form-group">
-        <%= label_tag :zip_code, "Zip Code" %>
-        <%= text_field_tag :zip_code, params[:zip_code], class: "form-control", placeholder: "Enter zip code" %>
+        <%= label_tag :zip, "Zip Code" %>
+        <%= text_field_tag :zip, params[:zip], class: "form-control", placeholder: "Enter zip code" %>
       </div>
 
       <div class="form-group">
@@ -121,7 +121,7 @@
   var name = $('input[name="name"]').val();
   var state = $('select[name="state"]').val();
   var city = $('input[name="city"]').val();
-  var zip_code = $('input[name="zip_code"]').val();
+  var zip = $('input[name="zip"]').val();
 
   var products = [];
   $("input[type='checkbox']:checked").each(function () {
@@ -135,7 +135,7 @@
       name: name,
       state: state,
       city: city,
-      zip_code: zip_code,
+      zip: zip,
       products: products
     },
     dataType: "json",
@@ -230,7 +230,7 @@
   #map{
     border-radius: 10px;
     margin-bottom: 20px;
-    height: 80vh;
+    height: 75vh;
   }
   
 </style>

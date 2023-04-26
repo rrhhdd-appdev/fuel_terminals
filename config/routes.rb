@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   # Route for map view (test v.2)
 
   get("/map2", { :controller => "maps2", :action => "index" })
-  get "/map2/search", to: "maps2#search"
+  get("/map2/search", { to: "maps2#search" })
 
   # Route for Markets views
 
-  get("/markets", { :controller => "markets", :action => "index" })
+  # get("/markets", { :controller => "markets", :action => "index" })
   # get("/markets/:path_id", { :controller => "markets", :action => "show" })
   # post("/search_market", { :controller => "markets", :action => "search" })
 
@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   # Routes for the Tank resource:
 
   # CREATE
-  post("/insert_tank", { :controller => "tanks", :action => "create" })
+  # post("/insert_tank", { :controller => "tanks", :action => "create" })
 
   # READ
   # get("/tanks", { :controller => "tanks", :action => "index" })
@@ -59,29 +59,29 @@ Rails.application.routes.draw do
 
   # UPDATE
 
-  post("/modify_tank/:path_id", { :controller => "tanks", :action => "update" })
+  #post("/modify_tank/:path_id", { :controller => "tanks", :action => "update" })
 
   # DELETE
-  get("/delete_tank/:path_id", { :controller => "tanks", :action => "destroy" })
+  #get("/delete_tank/:path_id", { :controller => "tanks", :action => "destroy" })
 
   #------------------------------
 
   # Routes for the Fuel resource:
 
   # CREATE
-  post("/insert_fuel", { :controller => "fuels", :action => "create" })
+  # post("/insert_fuel", { :controller => "fuels", :action => "create" })
 
   # READ
-  get("/fuels", { :controller => "fuels", :action => "index" })
+  # get("/fuels", { :controller => "fuels", :action => "index" })
 
   # get("/fuels/:path_id", { :controller => "fuels", :action => "show" })
 
   # UPDATE
 
-  post("/modify_fuel/:path_id", { :controller => "fuels", :action => "update" })
+  # post("/modify_fuel/:path_id", { :controller => "fuels", :action => "update" })
 
   # DELETE
-  get("/delete_fuel/:path_id", { :controller => "fuels", :action => "destroy" })
+  #get("/delete_fuel/:path_id", { :controller => "fuels", :action => "destroy" })
 
   #------------------------------
 
@@ -107,7 +107,7 @@ Rails.application.routes.draw do
   # Routes for the Terminal note resource:
 
   # CREATE
-  post("/insert_terminal_note", { :controller => "terminal_notes", :action => "create" })
+  post("/insert_terminal_note/", { :controller => "terminal_notes", :action => "create" })
 
   # READ
   # get("/terminal_notes", { :controller => "terminal_notes", :action => "index" })

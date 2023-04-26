@@ -1,8 +1,6 @@
-<script>
-    document.write('<a href="' + document.referrer + '">Go Back</a>');
-</script>
+<!DOCTYPE html>
 
-
+<div class="container py-5">
 <div>
   <h1><%= @the_facility.name.titleize %> Terminal Details</h1>
 </div>
@@ -619,7 +617,7 @@
    </button>
 </form>
 </div>
-
+</div>
 
 <!--
  <br>
@@ -632,6 +630,10 @@
 
 
 <style>
+  .page-wrapper {
+    margin-left: 3rem;
+    margin-right: 3rem; 
+  }
   .col-md-4{
     margin-bottom: 20px;
   }
