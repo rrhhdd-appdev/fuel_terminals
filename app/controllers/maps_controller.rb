@@ -1,26 +1,38 @@
 class MapsController < ApplicationController
-  
   def index
-    matching_facilities = Facility.all
+    @facilities = Facility.all
+    @markers = @facilities.map { |facility| { id: facility.id, latitude: facility.latitude, longitude: facility.longitude, name: facility.name } }
+    @states = Facility.pluck(:state).uniq.sort
 
-    @list_of_facilities = matching_facilities.order({ :created_at => :desc })
+    render({ :template => "maps/index.html.erb" })
+  end
 
+  def search
+    facilities = Facility.all
+    facilities = facilities.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
+    facilities = facilities.where(state: params[:state]) if params[:state].present?
+    facilities = facilities.where(city: params[:city].upcase) if params[:city].present?
+    facilities = facilities.where(zip: params[:zip]) if params[:zip].present?
 
-    # Returns an array of all states in which there are terminals
-
-    @state_list = Array.new
-    
-    Facility.all.each do |findstate|
-      current_state = findstate.state
-      if @state_list.include? current_state
-      else
-        @state_list.push(current_state)
-      end 
+    if params[:products].present?
+      params[:products].each do |product|
+        facilities = facilities.where("#{product} = ?", true)
+      end
     end
 
-    
-
-    
-    render({ :template => "maps/index.html.erb" })
+    markers = facilities.map do |f|
+      {
+        id: f.id,
+        latitude: f.latitude,
+        longitude: f.longitude,
+        name: f.name,
+        address: f.address,
+        capacity: f.capacity,
+        city: f.city,
+        state: f.state,
+      }
+    end
+    total_capacity = facilities.sum(:capacity)
+    render json: { markers: markers, count: facilities.count, total_capacity: total_capacity }
   end
 end

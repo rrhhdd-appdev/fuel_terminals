@@ -6,11 +6,7 @@ Rails.application.routes.draw do
   # Route for map view
 
   get("/map", { :controller => "maps", :action => "index" })
-
-  # Route for map view (test v.2)
-
-  get("/map2", { :controller => "maps2", :action => "index" })
-  get("/map2/search", { to: "maps2#search" })
+  get("/map/search", { to: "maps#search" })
 
   # Route for Markets views
 
