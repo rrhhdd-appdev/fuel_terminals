@@ -9,7 +9,7 @@ class MapsController < ApplicationController
 
   def search
     facilities = Facility.all
-    facilities = facilities.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
+    facilities = facilities.where("name LIKE ?", "%#{params[:name].upcase}%") if params[:name].present?
     facilities = facilities.where(state: params[:state]) if params[:state].present?
     facilities = facilities.where(city: params[:city].upcase) if params[:city].present?
     facilities = facilities.where(zip: params[:zip]) if params[:zip].present?
