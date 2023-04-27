@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   # Route for map view
 
-  get("/map", { :controller => "maps", :action => "index" })
   get("/map/search", { to: "maps#search" })
+  get("/map", { :controller => "maps", :action => "index" })
 
   # Route for Markets views
 
